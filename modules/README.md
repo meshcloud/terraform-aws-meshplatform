@@ -1,0 +1,3 @@
+## NOTE: About [/modules](https://github.com/meshcloud/terraform-aws-meshplatform/tree/master/modules)
+
+HashiCorp's Terraform Registry requires every repo to have a `main.tf` in its root dir. The meshPlatform code is broken down into multiple sub-modules, so they can't all be in the root dir [/](https://github.com/meshcloud/terraform-aws-meshplatform/tree/master). Therefore, meshPlatform's sub-modules are in the [/modules](https://github.com/meshcloud/terraform-aws-meshplatform/tree/master/modules) subdirectory, the example code is in the [/examples](https://github.com/meshcloud/terraform-aws-meshplatform/tree/master/examples) subdirectory.

@@ -1,0 +1,2 @@
+# This module is deprecated and only kept as it is at the moment still applied in old meshstacks
+# Once we migrated to the new module in those environments, this module can be removed. The new module is located in `../meshcloud-cost-explorer`
