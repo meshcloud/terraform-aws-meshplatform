@@ -1,3 +1,7 @@
+terraform {
+  # Set backend here
+}
+
 provider "aws" {
   region  = var.region
   profile = var.management_profile
