@@ -6,30 +6,45 @@ This terraform module is used to integrate AWS into a meshStack instance.
 
 ## How to use this Module
 
-1. Login into your Management (Root Organization) account
-2. Open your Organization and create 2 new accounts
+1. Login into your AWS Management Account (Root Organization).
 
-    2.1 Create `meshcloud` account ( the meshcloud backend servers will use this account to access the organization root account )
+    Ensure your organization account user has `IAMFullPermissions`,  `AmazonS3FullAccess` and `AWSOrganizationsFullAccess` permissions.
 
-    2.2 Create `automation` account ( to build automations with meshcloud Landing Zones )
+2. Open your Organization and create two new AWS accounts.
 
-3. Login into the new `meshcloud` and `automation` account. Create a new IAM user for both of these accounts and create AccessKey-SecretKey which has IAMFullPermissions and save the credentials. The terraform deployment will use these credentials to access these accounts. The organization(root) account user needs `IAMFullPermissions`,  `AmazonS3FullAccess` and `AWSOrganizationsFullAccess` permissions.
-4. Open AWS CloudShell Service on your Root management account
+    2.1 Create the `meshcloud` account. The meshStack will use this account to manage AWS accounts in your organization.
+
+    2.2 Create the `automation` account. The meshStack will use this account to manage CloudFormation that are used in [Landing Zones](https://docs.meshcloud.io/docs/meshcloud.landing-zones.html).
+
+3. Prepare permissions for executing the meshPlatform AWS Module.
+
+    3.1 Login into the new `meshcloud` account. Create a new IAM user and create AccessKey-SecretKey which has `IAMFullPermissions` and save the credentials.
+
+    3.2 Login into the new `automation` account. Create a new IAM user and create AccessKey-SecretKey which has `IAMFullPermissions` and save the credentials.
+
+4. Open AWS CloudShell Service on your Root management account.[^1]
 
     4.1 Install terraform into Cloudshell.
 
     ```sh
-        # Terminal Commands For Amazon Linux
-        sudo yum install -y yum-utils
-        sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
-        sudo yum -y install terraform
+    # Terminal Commands For Amazon Linux
+    sudo yum install -y yum-utils
+    sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+    sudo yum -y install terraform
     ```
 
-    4.2 Configure credentials
+    4.2 Configure credentials for aws CLI.
 
     ```sh
-    mkdir -p ~/.aws/
-    cat > ~/.aws/credentials2 << EOF
+    aws configure set profile.management.credential_source Ec2InstanceMetadata
+    aws configure --profile meshcloud
+    aws configure --profile automation
+    ```
+
+    Your credentials file will look like this:
+
+    ```sh
+    cat ~/.aws/credentials2
     [management]
     credential_source = Ec2InstanceMetadata
     [meshcloud]
@@ -38,23 +53,15 @@ This terraform module is used to integrate AWS into a meshStack instance.
     [automation]
     aws_access_key_id = XXXX
     aws_secret_access_key = XXXX
-    EOF
     ```
 
-    Alternative method: Use the aws CLI to configure credentials
+5. Clone the repository `git clone git@github.com:meshcloud/terraform-aws-meshplatform.git` and navigate into it.
 
-    ```sh
-    aws configure set profile.management.credential_source Ec2InstanceMetadata
-    aws configure --profile meshcloud
-    aws configure --profile automation
-    ```
+6. Create a `variable.tfvars` file and fill in the variables defined in `variables.tf`.[^2]
 
-5. Set the terraform variables
-    Create a `variable.tfvars` file and fill in the variables defined in `variables.tf`.[^1]
+7. Run `terraform apply`.
 
-6. Run `terraform apply`
-
-7. Read out secret keys
+8. Read out secret keys.
     The following secrets are needed for integrating AWS as a meshPlatform.
 
     ```sh
@@ -62,4 +69,5 @@ This terraform module is used to integrate AWS into a meshStack instance.
     terraform output kraken_aws_iam_keys
     ```
 
-[^1]: You can also use other [ways to assign values input variables](https://www.terraform.io/language/values/variables#assigning-values-to-root-module-variables).
+[^1]: This How-To guides you through the setup from your Cloudshell. You can also run the terraform scripts on your local machine.
+[^2]: You can also use other [ways to assign values input variables](https://www.terraform.io/language/values/variables#assigning-values-to-root-module-variables).

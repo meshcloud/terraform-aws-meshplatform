@@ -13,14 +13,31 @@ variable "support_root_account_via_aws_sso" {
 
 variable "aws_sso_instance_arn" {
   type        = string
-  default     = "arn:aws:sso:::instance/ssoins-xxxxxxxxxxxxxxx"
-  description = "AWS SSO Instance ARN that has to be created and configured manually. https://docs.meshcloud.io/docs/meshstack.aws.sso-setup.html"
+  description = "AWS SSO Instance ARN. Needs to be of the form arn:aws:sso:::instance/ssoins-xxxxxxxxxxxxxxx. Setup instructions https://docs.meshcloud.io/docs/meshstack.aws.sso-setup.html."
 }
 
 variable "aws_enrollment_enabled" {
   type        = bool
   default     = false
   description = "Set to true, to activate AWS Control Tower for the meshPlatform."
+}
+
+variable "replicator_privileged_external_id" {
+  type        = string
+  description = "Set this variable to a random UUID version 4. The external id is a secondary key to make an AssumeRole API call."
+  validation {
+    condition     = can(regex("^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$", var.replicator_privileged_external_id))
+    error_message = "Must be a valid UUID version 4."
+  }
+}
+
+variable "cost_explorer_privileged_external_id" {
+  type        = string
+  description = "Set this variable to a random UUID version 4. The external id is a secondary key to make an AssumeRole API call."
+  validation {
+    condition     = can(regex("^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$", var.cost_explorer_privileged_external_id))
+    error_message = "Must be a valid UUID version 4."
+  }
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -44,18 +61,6 @@ variable "automation_profile" {
   type        = string
   default     = "automation"
   description = "AWS Account profile for automation AWS account."
-}
-
-variable "replicator_privileged_external_id" {
-  type        = string
-  default     = uuid()
-  description = "This is a secondary security key(password) to make an AssumeRole API call. Needs to be of the form xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-}
-
-variable "cost_explorer_privileged_external_id" {
-  type        = string
-  default     = uuid()
-  description = "This is a secondary security key(password) to make an AssumeRole API call. Needs to be of the form xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 }
 
 variable "meshcloud_account_service_user_name" {
