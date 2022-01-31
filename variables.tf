@@ -4,13 +4,6 @@ variable "region" {
   description = "AWS region of the three AWS accounts needed for the meshPlatform."
 }
 
-# We should merge support_root_account_via_aws_sso and aws_sso_instance_arn into a single variable
-variable "support_root_account_via_aws_sso" {
-  type        = bool
-  default     = true
-  description = "Set to true, to activate AWS SSO for the meshPlatform."
-}
-
 variable "aws_sso_instance_arn" {
   type        = string
   description = "AWS SSO Instance ARN. Needs to be of the form arn:aws:sso:::instance/ssoins-xxxxxxxxxxxxxxx. Setup instructions https://docs.meshcloud.io/docs/meshstack.aws.sso-setup.html."
@@ -19,7 +12,7 @@ variable "aws_sso_instance_arn" {
 variable "aws_enrollment_enabled" {
   type        = bool
   default     = false
-  description = "Set to true, to activate AWS Control Tower for the meshPlatform."
+  description = "Set to true, to allow meshStack to enroll Accounts via AWS Control Tower for the meshPlatform."
 }
 
 variable "replicator_privileged_external_id" {
@@ -89,4 +82,10 @@ variable "cost_explorer_management_account_service_role_name" {
 variable "cost_explorer_meshcloud_account_service_user_name" {
   type    = string
   default = "meshcloud-cost-explorer-user"
+}
+
+variable "support_root_account_via_aws_sso" {
+  type        = bool
+  default     = false
+  description = "Set to true to allow meshStack to manage the Organization's AWS Root account's access via AWS SSO."
 }

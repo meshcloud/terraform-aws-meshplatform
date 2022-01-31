@@ -25,7 +25,7 @@ variable "privileged_external_id" {
 
 variable "aws_enrollment_enabled" {
   type        = bool
-  description = "Defines whether the replication should enroll accounts with AWS Control Tower"
+  description = "Set to true, to allow meshStack to enroll Accounts via AWS Control Tower for the meshPlatform"
   default     = false
 }
 
@@ -36,6 +36,6 @@ variable "aws_sso_instance_arn" {
 
 variable "support_root_account_via_aws_sso" {
   type        = bool
-  description = "Must be set to true of the Organization's AWS Root account's access management shall be managed by meshStack via AWS SSO."
+  description = "Set to true to allow meshStack to manage the Organization's AWS Root account's access via AWS SSO"
   default     = false
 }
