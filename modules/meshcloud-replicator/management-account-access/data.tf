@@ -27,7 +27,6 @@ data "aws_iam_policy_document" "meshfed_service" {
       "organizations:DescribeAccount",
       "organizations:ListParents",
       "organizations:ListOrganizationalUnitsForParent",
-      "organizations:CreateOrganizationalUnit",
       "organizations:ListTagsForResource",
       "organizations:TagResource",
       "organizations:UntagResource",
