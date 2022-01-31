@@ -33,6 +33,15 @@ variable "cost_explorer_privileged_external_id" {
   }
 }
 
+variable "landing_zone_ou_arns" {
+  type        = list(string)
+  description = "Organizational Unit ARNs that are used in Landing Zones. Include the root account ARN to manage Accounts in root with meshStack. We recommend to explicitly list the OU ARNs that meshStack should manage."
+  default = [
+    "arn:aws:organizations::*:ou/o-*/ou-*",
+    "arn:aws:organizations::${local.account_id}:root/o-*/r-*"
+  ]
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS
 # These parameters have reasonable defaults.

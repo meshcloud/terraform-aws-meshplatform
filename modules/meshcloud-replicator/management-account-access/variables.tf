@@ -39,3 +39,12 @@ variable "support_root_account_via_aws_sso" {
   description = "Set to true to allow meshStack to manage the Organization's AWS Root account's access via AWS SSO"
   default     = false
 }
+
+variable "landing_zone_ou_arns" {
+  type        = list(string)
+  description = "Organizational Unit ARNs that are used in Landing Zones. Include the root account ARN to manage Accounts in root with meshStack. We recommend to explicitly list the OU ARNs that meshStack should manage."
+  default = [
+    "arn:aws:organizations::*:ou/o-*/ou-*",
+    "arn:aws:organizations::${local.account_id}:root/o-*/r-*"
+  ]
+}

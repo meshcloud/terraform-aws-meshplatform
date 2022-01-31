@@ -20,17 +20,14 @@ data "aws_iam_policy_document" "meshfed_service" {
   }
 
   statement {
-    sid    = "OrgManagementAccess1"
+    sid    = "OrgManagementAccessRead"
     effect = "Allow"
     actions = [
       "organizations:DescribeOrganizationalUnit",
       "organizations:DescribeAccount",
       "organizations:ListParents",
       "organizations:ListOrganizationalUnitsForParent",
-      "organizations:ListTagsForResource",
-      "organizations:TagResource",
-      "organizations:UntagResource",
-      "organizations:MoveAccount"
+      "organizations:ListTagsForResource"
     ]
     resources = [
       "arn:aws:organizations::*:account/o-*/*",
@@ -40,7 +37,25 @@ data "aws_iam_policy_document" "meshfed_service" {
   }
 
   statement {
-    sid    = "OrgManagementAccess2"
+    sid    = "OrgManagementAccessWrite"
+    effect = "Allow"
+    actions = [
+      "organizations:TagResource",
+      "organizations:UntagResource",
+      "organizations:MoveAccount"
+    ]
+    resources = concat(
+      [
+        # The actions organizations:TagResource and organizations:UntagResource act on accounts. 
+        # The actions can not be restricted to a subtree of the OU hierarchy. This is a limitation in the permission model of AWS Organization Service.
+        # To supprt tagging for this meshPlatform we need to allow both actions on all accounts.
+        "arn:aws:organizations::*:account/o-*/*"
+      ],
+    var.landing_zone_ou_arns)
+  }
+
+  statement {
+    sid    = "OrgManagementAccessNoResourceLevelRestrictions"
     effect = "Allow"
     actions = [
       "organizations:ListRoots",
@@ -48,6 +63,8 @@ data "aws_iam_policy_document" "meshfed_service" {
       "organizations:CreateAccount",
       "organizations:DescribeCreateAccountStatus"
     ]
+    # The actions in this statement do not support resource level retrictions.
+    # The actions can not be restricted to a subtree of the OU hierarchy. This is a limitation in the permission model of AWS Organization Service.
     resources = ["*"]
   }
 

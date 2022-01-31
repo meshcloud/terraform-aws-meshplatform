@@ -82,6 +82,7 @@ module "management_account_replicator_access" {
   aws_enrollment_enabled               = var.aws_enrollment_enabled
   meshcloud_account_service_user_name  = var.meshcloud_account_service_user_name
   management_account_service_role_name = var.management_account_service_role_name
+  landing_zone_ou_arns                 = var.landing_zone_ou_arns
 
   depends_on = [
     module.meshcloud_account_replicator_access
