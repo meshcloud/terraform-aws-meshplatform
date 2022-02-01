@@ -74,12 +74,11 @@ This terraform module is used to integrate AWS into a meshStack instance as a me
     terraform apply
     ```
 
-8. Copy the terraform output variable values from CLI and pass them to meshcloud.
-    Read out sensitive terraform output values and pass them securely to meshcloud.
+8. Access terraform output and pass it securely to meshcloud.
 
     ```sh
-    terraform output replicator_aws_iam_keys
-    terraform output kraken_aws_iam_keys
+    # The JSON output contains sensitive values that must not be transmitted to meshcloud in plain text.
+    terraform output -json
     ```
 
 9. Follow [SSO setup instructions](https://docs.meshcloud.io/docs/meshstack.aws.sso-setup.html).
