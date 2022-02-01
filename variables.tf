@@ -18,19 +18,19 @@ variable "aws_enrollment_enabled" {
 variable "replicator_privileged_external_id" {
   type        = string
   description = "Set this variable to a random UUID version 4. The external id is a secondary key to make an AssumeRole API call."
-  validation {
-    condition     = can(regex("^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$", var.replicator_privileged_external_id))
-    error_message = "Must be a valid UUID version 4."
-  }
+  # validation {
+  #   condition     = can(regex("^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$", var.replicator_privileged_external_id))
+  #   error_message = "Must be a valid UUID version 4."
+  # }
 }
 
 variable "cost_explorer_privileged_external_id" {
   type        = string
   description = "Set this variable to a random UUID version 4. The external id is a secondary key to make an AssumeRole API call."
-  validation {
-    condition     = can(regex("^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$", var.cost_explorer_privileged_external_id))
-    error_message = "Must be a valid UUID version 4."
-  }
+  # validation {
+  #   condition     = can(regex("^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$", var.cost_explorer_privileged_external_id))
+  #   error_message = "Must be a valid UUID version 4."
+  # }
 }
 
 variable "landing_zone_ou_arns" {
