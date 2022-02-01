@@ -22,6 +22,8 @@ This terraform module is used to integrate AWS into a meshStack instance as a me
 
     3.2 Login into the new `automation` account. Create a new IAM user and create AccessKey-SecretKey which has `IAMFullPermissions` and save the credentials.
 
+    3.3 Login into the `management` account. Create a new IAM user and create AccessKey-SecretKey which has `IAMFullPermissions` and save the credentials.
+
 4. Open AWS CloudShell Service on your Root management account.[^1]
 
     4.1 Install terraform into Cloudshell.
@@ -38,7 +40,8 @@ This terraform module is used to integrate AWS into a meshStack instance as a me
     ```sh
     cat > ~/.aws/credentials << EOF
     [management]
-    credential_source = Ec2InstanceMetadata
+    aws_access_key_id = XXXX
+    aws_secret_access_key = XXXX
     [meshcloud]
     aws_access_key_id = XXXX
     aws_secret_access_key = XXXX
