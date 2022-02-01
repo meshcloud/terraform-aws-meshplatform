@@ -63,7 +63,7 @@ This terraform module is used to integrate AWS into a meshStack instance as a me
     aws_enrollment_enabled = true
     replicator_privileged_external_id = "replace with random UUID v4"
     cost_explorer_privileged_external_id = "replace with random UUID v4"
-    landing_zone_ous_arns=["arn:aws:organizations::*:ou/o-*/ou-*"]
+    landing_zone_ou_arns=["arn:aws:organizations::*:ou/o-*/ou-*"]
     EOF
     ```
 
