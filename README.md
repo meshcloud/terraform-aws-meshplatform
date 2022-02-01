@@ -36,15 +36,7 @@ This terraform module is used to integrate AWS into a meshStack instance as a me
     4.2 Configure credentials for aws CLI.
 
     ```sh
-    aws configure set profile.management.credential_source Ec2InstanceMetadata
-    aws configure --profile meshcloud
-    aws configure --profile automation
-    ```
-
-    Your credentials file will look like this:
-
-    ```sh
-    cat ~/.aws/credentials2
+    cat > ~/.aws/credentials << EOF
     [management]
     credential_source = Ec2InstanceMetadata
     [meshcloud]
@@ -53,21 +45,44 @@ This terraform module is used to integrate AWS into a meshStack instance as a me
     [automation]
     aws_access_key_id = XXXX
     aws_secret_access_key = XXXX
+    EOF
     ```
 
-5. Clone the repository `git clone git@github.com:meshcloud/terraform-aws-meshplatform.git` and navigate into it.
+5. Clone the repository and navigate into it.
 
-6. Create a `variable.tfvars` file and fill in the variables defined in `variables.tf`.[^2]
+    ```sh
+    git clone https://github.com/meshcloud/terraform-aws-meshplatform.git
+    cd terraform-aws-meshplatform
+    ```
 
-7. Run `terraform apply`.
+6. Create a `terraform.tfvars` file and fill in the variables defined in `variables.tf`.[^2]
 
-8. Read out secret keys.
-    The following secrets are needed for integrating AWS as a meshPlatform.
+    ```sh
+    cat > ~/terraform-aws-meshplatform/terraform.tfvars << EOF
+    aws_sso_instance_arn = "arn:aws:sso:::instance/ssoins-xxxxxxxxxxxxxxx"
+    aws_enrollment_enabled = true
+    replicator_privileged_external_id = "replace with random UUID v4"
+    cost_explorer_privileged_external_id = "replace with random UUID v4"
+    landing_zone_ous_arns=["arn:aws:organizations::*:ou/o-*/ou-*"]
+    EOF
+    ```
+
+7. Run
+
+    ```sh
+    terraform init
+    terraform apply
+    ```
+
+8. Copy the terraform output variable values from CLI and pass them to meshcloud.
+    Read out sensitive terraform output values and pass them securely to meshcloud.
 
     ```sh
     terraform output replicator_aws_iam_keys
     terraform output kraken_aws_iam_keys
     ```
+
+9. Follow [SSO setup instructions](https://docs.meshcloud.io/docs/meshstack.aws.sso-setup.html).
 
 [^1]: This How-To guides you through the setup from your Cloudshell. You can also run the terraform scripts on your local machine.
 [^2]: You can also use other [ways to assign values input variables](https://www.terraform.io/language/values/variables#assigning-values-to-root-module-variables).
