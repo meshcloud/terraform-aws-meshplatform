@@ -1,4 +1,4 @@
-# meshPlatform AWS Module
+# AWS meshPlatform Module
 
 meshStack is a Cloud Foundation Platform by meshcloud. AWS is a proprietary public cloud platform provided by Amazon Web Services. meshStack supports project and user management for AWS to include AWS services into cloud projects managed by meshStack.
 
