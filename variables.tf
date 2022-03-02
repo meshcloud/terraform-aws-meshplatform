@@ -36,9 +36,7 @@ variable "cost_explorer_privileged_external_id" {
 variable "landing_zone_ou_arns" {
   type        = list(string)
   description = "Organizational Unit ARNs that are used in Landing Zones. We recommend to explicitly list the OU ARNs that meshStack should manage."
-  default = [
-    "arn:aws:organizations::*:ou/o-*/ou-*"
-  ]
+  default     = ["arn:aws:organizations::*:ou/o-*/ou-*"]
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -83,13 +81,15 @@ variable "automation_account_service_role_name" {
 }
 
 variable "cost_explorer_management_account_service_role_name" {
-  type    = string
-  default = "MeshCostExplorerServiceRole"
+  type        = string
+  default     = "MeshCostExplorerServiceRole"
+  description = "Name of the custom role in the management account used by the cost explorer user."
 }
 
 variable "cost_explorer_meshcloud_account_service_user_name" {
-  type    = string
-  default = "meshcloud-cost-explorer-user"
+  type        = string
+  default     = "meshcloud-cost-explorer-user"
+  description = "Name of the user using cost explorer service to collect metering data."
 }
 
 variable "support_root_account_via_aws_sso" {

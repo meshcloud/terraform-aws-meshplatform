@@ -1,7 +1,3 @@
-terraform {
-  # Set backend here
-}
-
 provider "aws" {
   region  = var.region
   profile = var.management_profile
@@ -55,7 +51,6 @@ module "management_account_kraken_access" {
     module.meshcloud_account_kraken_access
   ]
 }
-
 
 module "meshcloud_account_replicator_access" {
   source = "./modules/meshcloud-replicator/meshcloud-account-access"

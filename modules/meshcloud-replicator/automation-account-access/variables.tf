@@ -4,7 +4,7 @@ variable "meshcloud_account_service_user_name" {
 
 variable "meshcloud_account_id" {
   type        = string
-  description = "The ID of the meshCloud AWS Account"
+  description = "The ID of the meshcloud AWS Account"
 }
 
 variable "privileged_external_id" {

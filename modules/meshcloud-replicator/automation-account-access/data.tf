@@ -52,8 +52,6 @@ data "aws_iam_policy_document" "cloudformation_admin_assume_role" {
   }
 }
 
-
-
 data "aws_iam_policy_document" "cloudformation_stackset_execution" {
   version = "2012-10-17"
 

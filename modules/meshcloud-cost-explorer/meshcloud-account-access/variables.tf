@@ -10,7 +10,7 @@ variable "meshcloud_account_service_user_name" {
 
 variable "management_account_id" {
   type        = string
-  description = "The ID of the Management Account ID"
+  description = "The ID of the Management Account"
 }
 
 variable "privileged_external_id" {
