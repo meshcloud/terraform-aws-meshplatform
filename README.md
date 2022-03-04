@@ -94,8 +94,6 @@ For an overview of the module structure, refer to [generated terraform docs](./T
     terraform output -json
     ```
 
-6. Follow [SSO setup instructions](https://docs.meshcloud.io/docs/meshstack.aws.sso-setup.html).
-
 ## Example Usages
 
 Check [examples](./examples/) for different use cases. As a quick start we recommend using [basic-aws-integration](./examples/basic-aws-integration) example.
