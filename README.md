@@ -63,26 +63,21 @@ For an overview of the module structure, refer to [generated terraform docs](./T
       EOF
       ```
 
-2. Create a directory and navigate into it.
+2. Download the example `main.tf` and `outputs.tf` files.
 
     ```sh
-    mkdir terraform-aws-meshplatform
-    cd terraform-aws-meshplatform
-    ```
-
-3. Create a `main.tf` and an `outputs.tf` files in the created directory that references this module
-
-    > See [Example Usages](#example-usages)
-
-    ```sh
+    # Downloads main.tf and outputs.tf files into ~/terraform-aws-meshplatform
     wget https://raw.githubusercontent.com/meshcloud/terraform-aws-meshplatform/main/examples/basic-aws-integration/main.tf -O ~/terraform-aws-meshplatform/main.tf
-
     wget https://raw.githubusercontent.com/meshcloud/terraform-aws-meshplatform/main/examples/basic-aws-integration/outputs.tf -O ~/terraform-aws-meshplatform/outputs.tf
     ```
 
-4. Run
+3. Open `~/terraform-aws-meshplatform/main.tf` with a text editor. Modify the module variables and Terraform state backend settings in the file.
+
+4. Execute the module.
 
     ```sh
+    # Changes into ~/terraform-aws-meshplatform and applies terraform
+    cd ~/terraform-aws-meshplatform
     terraform init
     terraform apply
     ```
