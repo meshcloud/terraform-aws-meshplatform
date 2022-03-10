@@ -27,7 +27,7 @@ data "aws_caller_identity" "automation" {
 }
 
 module "meshcloud_account_kraken_access" {
-  source = "./modules/meshcloud-cost-explorer/meshcloud-account-access"
+  source = "./modules/meshcloud-cost-explorer/ce-meshcloud-account-access"
   providers = {
     aws = aws.meshcloud
   }
@@ -38,7 +38,7 @@ module "meshcloud_account_kraken_access" {
 }
 
 module "management_account_kraken_access" {
-  source = "./modules/meshcloud-cost-explorer/management-account-access"
+  source = "./modules/meshcloud-cost-explorer/ce-management-account-access"
   providers = {
     aws = aws.management
   }
@@ -53,7 +53,7 @@ module "management_account_kraken_access" {
 }
 
 module "meshcloud_account_replicator_access" {
-  source = "./modules/meshcloud-replicator/meshcloud-account-access"
+  source = "./modules/meshcloud-replicator/replicator-meshcloud-account-access"
   providers = {
     aws = aws.meshcloud
   }
@@ -66,7 +66,7 @@ module "meshcloud_account_replicator_access" {
 }
 
 module "management_account_replicator_access" {
-  source = "./modules/meshcloud-replicator/management-account-access"
+  source = "./modules/meshcloud-replicator/replicator-management-account-access"
   providers = {
     aws = aws.management
   }
@@ -85,7 +85,7 @@ module "management_account_replicator_access" {
 }
 
 module "automation_account_replicator_access" {
-  source = "./modules/meshcloud-replicator/automation-account-access"
+  source = "./modules/meshcloud-replicator/replicator-automation-account-access"
   providers = {
     aws = aws.automation
   }
