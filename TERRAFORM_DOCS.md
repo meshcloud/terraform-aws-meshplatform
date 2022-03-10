@@ -8,19 +8,19 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws.automation"></a> [aws.automation](#provider\_aws.automation) | >= 2.7.0 |
-| <a name="provider_aws.management"></a> [aws.management](#provider\_aws.management) | >= 2.7.0 |
-| <a name="provider_aws.meshcloud"></a> [aws.meshcloud](#provider\_aws.meshcloud) | >= 2.7.0 |
+| <a name="provider_aws.automation"></a> [aws.automation](#provider\_aws.automation) | 4.4.0 |
+| <a name="provider_aws.management"></a> [aws.management](#provider\_aws.management) | 4.4.0 |
+| <a name="provider_aws.meshcloud"></a> [aws.meshcloud](#provider\_aws.meshcloud) | 4.4.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_automation_account_replicator_access"></a> [automation\_account\_replicator\_access](#module\_automation\_account\_replicator\_access) | ./modules/meshcloud-replicator/automation-account-access | n/a |
-| <a name="module_management_account_kraken_access"></a> [management\_account\_kraken\_access](#module\_management\_account\_kraken\_access) | ./modules/meshcloud-cost-explorer/management-account-access | n/a |
-| <a name="module_management_account_replicator_access"></a> [management\_account\_replicator\_access](#module\_management\_account\_replicator\_access) | ./modules/meshcloud-replicator/management-account-access | n/a |
-| <a name="module_meshcloud_account_kraken_access"></a> [meshcloud\_account\_kraken\_access](#module\_meshcloud\_account\_kraken\_access) | ./modules/meshcloud-cost-explorer/meshcloud-account-access | n/a |
-| <a name="module_meshcloud_account_replicator_access"></a> [meshcloud\_account\_replicator\_access](#module\_meshcloud\_account\_replicator\_access) | ./modules/meshcloud-replicator/meshcloud-account-access | n/a |
+| <a name="module_automation_account_replicator_access"></a> [automation\_account\_replicator\_access](#module\_automation\_account\_replicator\_access) | ./modules/meshcloud-replicator/replicator-automation-account-access | n/a |
+| <a name="module_management_account_kraken_access"></a> [management\_account\_kraken\_access](#module\_management\_account\_kraken\_access) | ./modules/meshcloud-cost-explorer/ce-management-account-access | n/a |
+| <a name="module_management_account_replicator_access"></a> [management\_account\_replicator\_access](#module\_management\_account\_replicator\_access) | ./modules/meshcloud-replicator/replicator-management-account-access | n/a |
+| <a name="module_meshcloud_account_kraken_access"></a> [meshcloud\_account\_kraken\_access](#module\_meshcloud\_account\_kraken\_access) | ./modules/meshcloud-cost-explorer/ce-meshcloud-account-access | n/a |
+| <a name="module_meshcloud_account_replicator_access"></a> [meshcloud\_account\_replicator\_access](#module\_meshcloud\_account\_replicator\_access) | ./modules/meshcloud-replicator/replicator-meshcloud-account-access | n/a |
 
 ## Resources
 
