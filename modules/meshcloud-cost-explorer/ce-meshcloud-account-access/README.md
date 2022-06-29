@@ -1,3 +1,4 @@
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -39,3 +40,4 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_aws_iam_keys"></a> [aws\_iam\_keys](#output\_aws\_iam\_keys) | AWS access and secret keys for cost explorer user. |
+<!-- END_TF_DOCS -->

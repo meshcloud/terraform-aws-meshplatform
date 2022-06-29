@@ -46,7 +46,7 @@ data "aws_iam_policy_document" "meshfed_service" {
     ]
     resources = concat(
       [
-        # The actions organizations:TagResource and organizations:UntagResource act on accounts. 
+        # The actions organizations:TagResource and organizations:UntagResource act on accounts.
         # The actions can not be restricted to a subtree of the OU hierarchy. This is a limitation in the permission model of AWS Organization Service.
         # To supprt tagging for this meshPlatform we need to allow both actions on all accounts.
         "arn:aws:organizations::*:account/o-*/*",
