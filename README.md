@@ -4,6 +4,10 @@ meshStack is a Cloud Foundation Platform by meshcloud. AWS is a proprietary publ
 
 This terraform module is used to integrate AWS into a meshStack instance as a meshPlatform. More information on the integration can be found on [meshcloud public docs](https://docs.meshcloud.io/docs/meshstack.aws.index.html).
 
+<p align="center">
+  <img src="/.github/Icon_AWS_Meshi_Hugs.png" width="250">
+</p>
+
 ## Prerequisites
 
 - 3 IAM users in 3 AWS accounts with `IAMFullAccess`:
