@@ -17,5 +17,7 @@ jobs:
     - run: terraform init
 
     - run: terraform validate
+      # note: we can only validate the example atm. see https://github.com/hashicorp/terraform/issues/28490  
+      working-directory: examples/basic-aws-integration
 
     - run: terraform fmt -recursive -check
