@@ -1,21 +1,3 @@
-provider "aws" {
-  region  = var.region
-  profile = var.management_profile
-  alias   = "management"
-}
-
-provider "aws" {
-  region  = var.region
-  profile = var.meshcloud_profile
-  alias   = "meshcloud"
-}
-
-provider "aws" {
-  region  = var.region
-  profile = var.automation_profile
-  alias   = "automation"
-}
-
 data "aws_caller_identity" "management" {
   provider = aws.management
 }
@@ -37,6 +19,19 @@ module "meshcloud_account_kraken_access" {
   meshcloud_account_service_user_name  = var.cost_explorer_meshcloud_account_service_user_name
 }
 
+module "meshcloud_account_replicator_access" {
+  source = "./modules/meshcloud-replicator/replicator-meshcloud-account-access"
+  providers = {
+    aws = aws.meshcloud
+  }
+  management_account_id                = data.aws_caller_identity.management.account_id
+  automation_account_id                = data.aws_caller_identity.automation.account_id
+  privileged_external_id               = var.replicator_privileged_external_id
+  meshcloud_account_service_user_name  = var.meshcloud_account_service_user_name
+  management_account_service_role_name = var.management_account_service_role_name
+  automation_account_service_role_name = var.automation_account_service_role_name
+}
+
 module "management_account_kraken_access" {
   source = "./modules/meshcloud-cost-explorer/ce-management-account-access"
   providers = {
@@ -50,19 +45,6 @@ module "management_account_kraken_access" {
   depends_on = [
     module.meshcloud_account_kraken_access
   ]
-}
-
-module "meshcloud_account_replicator_access" {
-  source = "./modules/meshcloud-replicator/replicator-meshcloud-account-access"
-  providers = {
-    aws = aws.meshcloud
-  }
-  management_account_id                = data.aws_caller_identity.management.account_id
-  automation_account_id                = data.aws_caller_identity.automation.account_id
-  privileged_external_id               = var.replicator_privileged_external_id
-  meshcloud_account_service_user_name  = var.meshcloud_account_service_user_name
-  management_account_service_role_name = var.management_account_service_role_name
-  automation_account_service_role_name = var.automation_account_service_role_name
 }
 
 module "management_account_replicator_access" {

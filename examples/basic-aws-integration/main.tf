@@ -11,9 +11,30 @@ terraform {
   }
 }
 
+provider aws {
+  alias = "management"
+  profile = "management"
+}
+
+provider aws {
+  alias = "meshcloud"
+  profile = "meshcloud"
+}
+
+provider aws {
+  alias = "automation"
+  profile = "automation"
+}
+
 module "meshplatform" {
   source = "git::https://github.com/meshcloud/terraform-aws-meshplatform.git"
-
+  
+  providers = {
+    aws.management = aws.management
+    aws.meshcloud  = aws.meshcloud
+    aws.automation = aws.automation
+  } 
+  
   aws_sso_instance_arn                 = "arn:aws:sso:::instance/ssoins-xxxxxxxxxxxxxxx"
   aws_enrollment_enabled               = true
   replicator_privileged_external_id    = "replace with random UUID v4"

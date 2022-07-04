@@ -10,27 +10,51 @@ This terraform module is used to integrate AWS into a meshStack instance as a me
 
 ## Prerequisites
 
-- 3 IAM users in 3 AWS accounts with `IAMFullAccess`:
-  - management account: Your existing organization (or root) account that all other accounts are under.
-  - meshcloud account: meshStack will use this account to manage AWS accounts in your organization.
-  - automation account: meshStack will use this account to manage CloudFormation that are used in [Landing Zones](https://docs.meshcloud.io/docs/meshcloud.landing-zones.html).
-
-  Include those IAM users' access and secret keys in your `~/.aws/credentials` file as follows:
-
-  ```ini
-    [management]
-    aws_access_key_id = XXXX
-    aws_secret_access_key = XXXX
-    [meshcloud]
-    aws_access_key_id = XXXX
-    aws_secret_access_key = XXXX
-    [automation]
-    aws_access_key_id = XXXX
-    aws_secret_access_key = XXXX
-  ```
-
 - [Terraform installed](https://learn.hashicorp.com/tutorials/terraform/install-cli)
 - [AWS CLI installed](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
+This module assumes you are following landing zone best practices and segregate accounts by function.
+To call this module, you will need three `aws` providers set up against different accounts
+
+- management account: organization management account, the account that hosts the AWS Organization
+- meshcloud account: meshStack will use this account to host the IAM users used by meshStack
+- automation account: meshStack will use this account to manage CloudFormation that are used in [Landing Zones](https://docs.meshcloud.io/docs/meshcloud.landing-zones.html).
+  
+If you're planning to execute the setup manually, one simple way to set up the required providers is by setting up three
+different profiles on your AWS CLI and include those IAM users' access and secret keys in your `~/.aws/credentials` file
+as described below.
+
+You can also of course set up the `aws` providers any other way you like (e.g. using `assume_role`), as long as you
+pass them when calling the meshPlatform module:
+
+```hcl
+provider aws {
+  alias = "management"
+  profile = "management"
+}
+
+provider aws {
+  alias = "meshcloud"
+  profile = "meshcloud"
+}
+
+provider aws {
+  alias = "automation"
+  profile = "automation"
+}
+
+module "meshplatform" {
+  source = "git::https://github.com/meshcloud/terraform-aws-meshplatform.git"
+  
+  providers = {
+    aws.management = aws.management
+    aws.meshcloud  = aws.meshcloud
+    aws.automation = aws.automation
+  }
+
+  # set input variables
+}
+```
 
 ## Module Structure
 

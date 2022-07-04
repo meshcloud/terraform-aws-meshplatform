@@ -1,9 +1,3 @@
-variable "region" {
-  type        = string
-  default     = "eu-central-1"
-  description = "AWS region of the three AWS accounts needed for the meshPlatform."
-}
-
 variable "aws_sso_instance_arn" {
   type        = string
   description = "AWS SSO Instance ARN. Needs to be of the form arn:aws:sso:::instance/ssoins-xxxxxxxxxxxxxxx. Setup instructions https://docs.meshcloud.io/docs/meshstack.aws.sso-setup.html."
@@ -43,24 +37,6 @@ variable "landing_zone_ou_arns" {
 # OPTIONAL PARAMETERS
 # These parameters have reasonable defaults.
 # ---------------------------------------------------------------------------------------------------------------------
-
-variable "management_profile" {
-  type        = string
-  default     = "management"
-  description = "AWS Account profile for management AWS account."
-}
-
-variable "meshcloud_profile" {
-  type        = string
-  default     = "meshcloud"
-  description = "AWS Account profile for meshcloud AWS account."
-}
-
-variable "automation_profile" {
-  type        = string
-  default     = "automation"
-  description = "AWS Account profile for automation AWS account."
-}
 
 variable "meshcloud_account_service_user_name" {
   type        = string
