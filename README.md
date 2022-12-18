@@ -2,7 +2,7 @@
 
 meshStack is a Cloud Foundation Platform by meshcloud. AWS is a proprietary public cloud platform provided by Amazon Web Services. meshStack supports project and user management for AWS to include AWS services into cloud projects managed by meshStack.
 
-This terraform module is used to integrate AWS into a meshStack instance as a meshPlatform. More information on the integration can be found on [meshcloud public docs](https://docs.meshcloud.io/docs/meshstack.aws.index.html).
+This terraform module is used to integrate AWS into a meshStack instance as a meshPlatform. The output of this module is a set of credentials that need to be configured in meshStack as described in [meshcloud public docs](https://docs.meshcloud.io/docs/meshstack.how-to.integrate-meshplatform.html). 
 
 <p align="center">
   <img src="/.github/Icon_AWS_Meshi_Hugs.png" width="250">
