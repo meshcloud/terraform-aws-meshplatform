@@ -20,6 +20,26 @@ To call this module, you will need three `aws` providers set up against differen
 - meshcloud account: meshStack will use this account to host the IAM users used by meshStack
 - automation account: meshStack will use this account to manage CloudFormation that are used in [Landing Zones](https://docs.meshcloud.io/docs/meshcloud.landing-zones.html).
 
+Here is how the users and roles for the meshplatform fit together:
+
+```mermaid
+graph LR;
+    subgraph Organization Account
+        meshfedServiceRole("🪖 MeshfedServiceRole");
+        costExplorerServiceRole("🪖 MeshCostExplorerServiceRole");
+    end
+    subgraph meshcloud Account
+        replicatorUser["👤 ReplicatorUser & AccessKey"];
+        costExplorerUser["👤 CostExplorerUser & AccessKey"];
+    end
+    replicatorUser--Trusted Entity with External-id-->meshfedServiceRole;
+    costExplorerUser--Trusted Entity with External-id-->costExplorerServiceRole;
+    subgraph Automation Account
+        meshfedAutomationRole("🪖 MeshfedAutomationRole");
+    end
+    replicatorUser--Trusted Entity with External-id-->meshfedAutomationRole
+```
+
 If you're planning to execute the setup manually, one simple way to set up the required providers is by setting up three
 different profiles on your AWS CLI and include those IAM users' access and secret keys in your `~/.aws/credentials` file
 as described below.
