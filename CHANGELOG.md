@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added CHANGELOG.md
 - Added pre-commit hooks
+- Added ARNs of managed accounts roles to output
 
 ## [v0.1.0]
 
