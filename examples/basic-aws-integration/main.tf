@@ -5,9 +5,12 @@
 # Remove/comment the backend block below if you are only testing the module.
 # Please be aware that you cannot destroy the created resources via terraform if you lose the state file.
 terraform {
-  backend "gcs" {
-    prefix = "meshplatforms/aws"
-    bucket = "my-terraform-states"
+  backend "s3" {
+    region  = "eu-west-1"
+    profile = "myprofile"
+    bucket  = "cloudfoundation-tfstates"
+    key     = "meshstack/platforms/aws"
+    encrypt = true
   }
 }
 
@@ -42,4 +45,5 @@ module "meshplatform" {
   aws_enrollment_enabled               = true
   replicator_privileged_external_id    = "replace with random UUID v4"
   cost_explorer_privileged_external_id = "replace with random UUID v4"
+  landing_zone_ou_arns                 = ["arn:aws:organizations::*:ou/o-*/ou-*"]
 }
