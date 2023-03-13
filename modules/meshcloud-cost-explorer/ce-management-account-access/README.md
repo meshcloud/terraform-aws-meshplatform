@@ -9,7 +9,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.21.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 2.7.0 |
 
 ## Modules
 
@@ -37,5 +37,7 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_management_account_role_arn"></a> [management\_account\_role\_arn](#output\_management\_account\_role\_arn) | Amazon Resource Name (ARN) of Management Account Role |
 <!-- END_TF_DOCS -->
