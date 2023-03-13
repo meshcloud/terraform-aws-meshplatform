@@ -40,9 +40,9 @@ output "meshstack_access_role_name" {
   description = "The name for the Account Access Role that will be rolled out to all managed accounts."
 }
 
-output "kraken_aws_iam_keys" {
-  value       = module.meshplatform.kraken_aws_iam_keys
-  description = "You can access your credentials when you execute `terraform output kraken_aws_iam_keys` command"
+output "metering_aws_iam_keys" {
+  value       = module.meshplatform.metering_aws_iam_keys
+  description = "You can access your credentials when you execute `terraform output metering_aws_iam_keys` command"
   sensitive   = true
 }
 

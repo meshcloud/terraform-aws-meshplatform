@@ -174,9 +174,9 @@ Before opening a Pull Request, we recommend following the below steps to get a f
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_automation_account_replicator_access"></a> [automation\_account\_replicator\_access](#module\_automation\_account\_replicator\_access) | ./modules/meshcloud-replicator/replicator-automation-account-access | n/a |
-| <a name="module_management_account_kraken_access"></a> [management\_account\_kraken\_access](#module\_management\_account\_kraken\_access) | ./modules/meshcloud-cost-explorer/ce-management-account-access | n/a |
+| <a name="module_management_account_metering_access"></a> [management\_account\_metering\_access](#module\_management\_account\_metering\_access) | ./modules/meshcloud-cost-explorer/ce-management-account-access | n/a |
 | <a name="module_management_account_replicator_access"></a> [management\_account\_replicator\_access](#module\_management\_account\_replicator\_access) | ./modules/meshcloud-replicator/replicator-management-account-access | n/a |
-| <a name="module_meshcloud_account_kraken_access"></a> [meshcloud\_account\_kraken\_access](#module\_meshcloud\_account\_kraken\_access) | ./modules/meshcloud-cost-explorer/ce-meshcloud-account-access | n/a |
+| <a name="module_meshcloud_account_metering_access"></a> [meshcloud\_account\_metering\_access](#module\_meshcloud\_account\_metering\_access) | ./modules/meshcloud-cost-explorer/ce-meshcloud-account-access | n/a |
 | <a name="module_meshcloud_account_replicator_access"></a> [meshcloud\_account\_replicator\_access](#module\_meshcloud\_account\_replicator\_access) | ./modules/meshcloud-replicator/replicator-meshcloud-account-access | n/a |
 
 ## Resources
@@ -210,10 +210,10 @@ Before opening a Pull Request, we recommend following the below steps to get a f
 | <a name="output_automation_account_id"></a> [automation\_account\_id](#output\_automation\_account\_id) | Automation Account ID |
 | <a name="output_cost_explorer_management_account_role_arn"></a> [cost\_explorer\_management\_account\_role\_arn](#output\_cost\_explorer\_management\_account\_role\_arn) | Amazon Resource Name (ARN) of Management Account Role for replicator |
 | <a name="output_cost_explorer_privileged_external_id"></a> [cost\_explorer\_privileged\_external\_id](#output\_cost\_explorer\_privileged\_external\_id) | Cost explorer privileged\_external\_id |
-| <a name="output_kraken_aws_iam_keys"></a> [kraken\_aws\_iam\_keys](#output\_kraken\_aws\_iam\_keys) | You can access your credentials when you execute `terraform output kraken_aws_iam_keys` command |
 | <a name="output_management_account_id"></a> [management\_account\_id](#output\_management\_account\_id) | Management Account ID |
 | <a name="output_meshcloud_account_id"></a> [meshcloud\_account\_id](#output\_meshcloud\_account\_id) | Meshcloud Account ID |
 | <a name="output_meshstack_access_role_name"></a> [meshstack\_access\_role\_name](#output\_meshstack\_access\_role\_name) | The name for the Account Access Role that will be rolled out to all managed accounts. |
+| <a name="output_metering_aws_iam_keys"></a> [metering\_aws\_iam\_keys](#output\_metering\_aws\_iam\_keys) | You can access your credentials when you execute `terraform output metering_aws_iam_keys` command |
 | <a name="output_replicator_automation_account_role_arn"></a> [replicator\_automation\_account\_role\_arn](#output\_replicator\_automation\_account\_role\_arn) | Amazon Resource Name (ARN) of Automation Account Role for replicator |
 | <a name="output_replicator_aws_iam_keys"></a> [replicator\_aws\_iam\_keys](#output\_replicator\_aws\_iam\_keys) | You can access your credentials when you execute `terraform output replicator_aws_iam_keys` command |
 | <a name="output_replicator_management_account_role_arn"></a> [replicator\_management\_account\_role\_arn](#output\_replicator\_management\_account\_role\_arn) | Amazon Resource Name (ARN) of Management Account Role for replicator |

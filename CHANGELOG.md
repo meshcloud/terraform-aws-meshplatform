@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added pre-commit hooks
 - Added ARNs of managed accounts roles to output
 - Added meshStack access role to output
+- Renamed metering related parts from kraken to metering
 
 ## [v0.1.0]
 

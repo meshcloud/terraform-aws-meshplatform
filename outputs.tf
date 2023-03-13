@@ -43,15 +43,15 @@ output "meshstack_access_role_name" {
 }
 
 # Metering
-output "kraken_aws_iam_keys" {
-  value       = module.meshcloud_account_kraken_access.aws_iam_keys
-  description = "You can access your credentials when you execute `terraform output kraken_aws_iam_keys` command"
+output "metering_aws_iam_keys" {
+  value       = module.meshcloud_account_metering_access.aws_iam_keys
+  description = "You can access your credentials when you execute `terraform output metering_aws_iam_keys` command"
   sensitive   = true
 }
 
 output "cost_explorer_management_account_role_arn" {
   description = "Amazon Resource Name (ARN) of Management Account Role for replicator"
-  value       = module.management_account_kraken_access.management_account_role_arn
+  value       = module.management_account_metering_access.management_account_role_arn
 }
 
 output "cost_explorer_privileged_external_id" {
