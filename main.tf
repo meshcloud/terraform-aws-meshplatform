@@ -8,7 +8,7 @@ data "aws_caller_identity" "automation" {
   provider = aws.automation
 }
 
-module "meshcloud_account_kraken_access" {
+module "meshcloud_account_metering_access" {
   source = "./modules/meshcloud-cost-explorer/ce-meshcloud-account-access"
   providers = {
     aws = aws.meshcloud
@@ -32,7 +32,7 @@ module "meshcloud_account_replicator_access" {
   automation_account_service_role_name = var.automation_account_service_role_name
 }
 
-module "management_account_kraken_access" {
+module "management_account_metering_access" {
   source = "./modules/meshcloud-cost-explorer/ce-management-account-access"
   providers = {
     aws = aws.management
@@ -43,7 +43,7 @@ module "management_account_kraken_access" {
   meshcloud_account_service_user_name  = var.cost_explorer_meshcloud_account_service_user_name
 
   depends_on = [
-    module.meshcloud_account_kraken_access
+    module.meshcloud_account_metering_access
   ]
 }
 
