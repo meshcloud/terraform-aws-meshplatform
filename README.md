@@ -2,7 +2,7 @@
 
 meshStack is a Cloud Foundation Platform by meshcloud. AWS is a proprietary public cloud platform provided by Amazon Web Services. meshStack supports project and user management for AWS to include AWS services into cloud projects managed by meshStack.
 
-This terraform module is used to integrate AWS into a meshStack instance as a meshPlatform. The output of this module is a set of credentials that need to be configured in meshStack as described in [meshcloud public docs](https://docs.meshcloud.io/docs/meshstack.how-to.integrate-meshplatform.html). 
+This terraform module is used to integrate AWS into a meshStack instance as a meshPlatform. The output of this module is a set of credentials that need to be configured in meshStack as described in [meshcloud public docs](https://docs.meshcloud.io/docs/meshstack.how-to.integrate-meshplatform.html).
 
 <p align="center">
   <img src="/.github/Icon_AWS_Meshi_Hugs.png" width="250">
@@ -165,9 +165,9 @@ Before opening a Pull Request, we recommend following the below steps to get a f
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws.automation"></a> [aws.automation](#provider\_aws.automation) | 4.21.0 |
-| <a name="provider_aws.management"></a> [aws.management](#provider\_aws.management) | 4.21.0 |
-| <a name="provider_aws.meshcloud"></a> [aws.meshcloud](#provider\_aws.meshcloud) | 4.21.0 |
+| <a name="provider_aws.automation"></a> [aws.automation](#provider\_aws.automation) | 4.57.1 |
+| <a name="provider_aws.management"></a> [aws.management](#provider\_aws.management) | 4.57.1 |
+| <a name="provider_aws.meshcloud"></a> [aws.meshcloud](#provider\_aws.meshcloud) | 4.57.1 |
 
 ## Modules
 
@@ -208,10 +208,14 @@ Before opening a Pull Request, we recommend following the below steps to get a f
 | Name | Description |
 |------|-------------|
 | <a name="output_automation_account_id"></a> [automation\_account\_id](#output\_automation\_account\_id) | Automation Account ID |
+| <a name="output_cost_explorer_management_account_role_arn"></a> [cost\_explorer\_management\_account\_role\_arn](#output\_cost\_explorer\_management\_account\_role\_arn) | Amazon Resource Name (ARN) of Management Account Role for replicator |
 | <a name="output_cost_explorer_privileged_external_id"></a> [cost\_explorer\_privileged\_external\_id](#output\_cost\_explorer\_privileged\_external\_id) | Cost explorer privileged\_external\_id |
 | <a name="output_kraken_aws_iam_keys"></a> [kraken\_aws\_iam\_keys](#output\_kraken\_aws\_iam\_keys) | You can access your credentials when you execute `terraform output kraken_aws_iam_keys` command |
 | <a name="output_management_account_id"></a> [management\_account\_id](#output\_management\_account\_id) | Management Account ID |
 | <a name="output_meshcloud_account_id"></a> [meshcloud\_account\_id](#output\_meshcloud\_account\_id) | Meshcloud Account ID |
+| <a name="output_meshstack_access_role_name"></a> [meshstack\_access\_role\_name](#output\_meshstack\_access\_role\_name) | The name for the Account Access Role that will be rolled out to all managed accounts. |
+| <a name="output_replicator_automation_account_role_arn"></a> [replicator\_automation\_account\_role\_arn](#output\_replicator\_automation\_account\_role\_arn) | Amazon Resource Name (ARN) of Automation Account Role for replicator |
 | <a name="output_replicator_aws_iam_keys"></a> [replicator\_aws\_iam\_keys](#output\_replicator\_aws\_iam\_keys) | You can access your credentials when you execute `terraform output replicator_aws_iam_keys` command |
+| <a name="output_replicator_management_account_role_arn"></a> [replicator\_management\_account\_role\_arn](#output\_replicator\_management\_account\_role\_arn) | Amazon Resource Name (ARN) of Management Account Role for replicator |
 | <a name="output_replicator_privileged_external_id"></a> [replicator\_privileged\_external\_id](#output\_replicator\_privileged\_external\_id) | Replicator privileged\_external\_id |
 <!-- END_TF_DOCS -->

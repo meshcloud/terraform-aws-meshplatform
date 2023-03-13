@@ -23,18 +23,23 @@ output "replicator_aws_iam_keys" {
 
 output "replicator_management_account_role_arn" {
   description = "Amazon Resource Name (ARN) of Management Account Role for replicator"
-  value = module.management_account_replicator_access.management_account_role_arn
+  value       = module.management_account_replicator_access.management_account_role_arn
 }
 
 output "replicator_automation_account_role_arn" {
   description = "Amazon Resource Name (ARN) of Automation Account Role for replicator"
-  value = module.automation_account_replicator_access.automation_account_role_arn
+  value       = module.automation_account_replicator_access.automation_account_role_arn
 }
 
 output "replicator_privileged_external_id" {
   value       = var.replicator_privileged_external_id
   description = "Replicator privileged_external_id"
   sensitive   = true
+}
+
+output "meshstack_access_role_name" {
+  description = "The name for the Account Access Role that will be rolled out to all managed accounts."
+  value       = module.management_account_replicator_access.meshstack_access_role_name
 }
 
 # Metering
@@ -46,7 +51,7 @@ output "kraken_aws_iam_keys" {
 
 output "cost_explorer_management_account_role_arn" {
   description = "Amazon Resource Name (ARN) of Management Account Role for replicator"
-  value = module.management_account_kraken_access.management_account_role_arn
+  value       = module.management_account_kraken_access.management_account_role_arn
 }
 
 output "cost_explorer_privileged_external_id" {

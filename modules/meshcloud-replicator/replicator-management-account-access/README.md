@@ -9,7 +9,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.21.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 2.7.0 |
 
 ## Modules
 
@@ -47,5 +47,8 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_management_account_role_arn"></a> [management\_account\_role\_arn](#output\_management\_account\_role\_arn) | Amazon Resource Name (ARN) of Management Account Role |
+| <a name="output_meshstack_access_role_name"></a> [meshstack\_access\_role\_name](#output\_meshstack\_access\_role\_name) | The name for the Account Access Role that will be rolled out to all managed accounts. |
 <!-- END_TF_DOCS -->
