@@ -24,7 +24,7 @@ Here is how the users and roles for the meshplatform fit together:
 
 ```mermaid
 graph LR;
-    subgraph Organization Account
+    subgraph Management Account
         meshfedServiceRole("🪖 MeshfedServiceRole");
         costExplorerServiceRole("🪖 MeshCostExplorerServiceRole");
     end
