@@ -30,7 +30,7 @@ provider "aws" {
 }
 
 module "meshplatform" {
-  source = "../../"
+  source = "git::https://github.com/meshcloud/terraform-aws-meshplatform.git"
   # note: for production use we recommend using a pinned version of the module like so
   # source = "git::https://github.com/meshcloud/terraform-aws-meshplatform.git?ref=v0.2.0"
 
