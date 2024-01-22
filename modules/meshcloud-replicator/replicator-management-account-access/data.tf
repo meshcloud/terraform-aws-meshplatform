@@ -124,6 +124,7 @@ data "aws_iam_policy_document" "meshfed_service_assume_role" {
   }
 }
 
+# As per AWS recommendation https://docs.aws.amazon.com/controltower/latest/userguide/roles-how.html#automated-provisioning
 data "aws_iam_policy_document" "meshfed_service_enrollment_additional" {
   version = "2012-10-17"
   statement {
