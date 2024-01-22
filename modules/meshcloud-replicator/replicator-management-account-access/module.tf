@@ -16,25 +16,25 @@ resource "aws_iam_role_policy_attachment" "meshfed_service" {
 }
 
 resource "aws_iam_role_policy_attachment" "meshfed_service_enrollment_sc_enduser" {
-  count      = var.aws_enrollment_enabled ? 1 : 0
+  count      = var.control_tower_enrollment_enabled ? 1 : 0
   role       = aws_iam_role.meshfed_service.name
   policy_arn = "arn:aws:iam::aws:policy/AWSServiceCatalogEndUserFullAccess"
 }
 
 resource "aws_iam_role_policy_attachment" "meshfed_service_enrollment_sc_adm_read" {
-  count      = var.aws_enrollment_enabled ? 1 : 0
+  count      = var.control_tower_enrollment_enabled ? 1 : 0
   role       = aws_iam_role.meshfed_service.name
   policy_arn = "arn:aws:iam::aws:policy/AWSServiceCatalogAdminReadOnlyAccess"
 }
 
 resource "aws_iam_policy" "meshfed_service_enrollment_additional" {
-  count  = var.aws_enrollment_enabled ? 1 : 0
+  count  = var.control_tower_enrollment_enabled ? 1 : 0
   name   = "${var.management_account_service_role_name}AdditionalPolicy"
   policy = data.aws_iam_policy_document.meshfed_service_enrollment_additional.json
 }
 
 resource "aws_iam_role_policy_attachment" "meshfed_service_enrollment_additional" {
-  count      = var.aws_enrollment_enabled ? 1 : 0
+  count      = var.control_tower_enrollment_enabled ? 1 : 0
   role       = aws_iam_role.meshfed_service.name
   policy_arn = aws_iam_policy.meshfed_service_enrollment_additional[0].arn
 }

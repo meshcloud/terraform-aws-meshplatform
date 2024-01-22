@@ -56,7 +56,7 @@ module "management_account_replicator_access" {
   privileged_external_id               = var.replicator_privileged_external_id
   support_root_account_via_aws_sso     = var.support_root_account_via_aws_sso
   aws_sso_instance_arn                 = var.aws_sso_instance_arn
-  aws_enrollment_enabled               = var.aws_enrollment_enabled
+  control_tower_enrollment_enabled     = var.control_tower_enrollment_enabled
   meshcloud_account_service_user_name  = var.meshcloud_account_service_user_name
   management_account_service_role_name = var.management_account_service_role_name
   landing_zone_ou_arns                 = var.landing_zone_ou_arns
