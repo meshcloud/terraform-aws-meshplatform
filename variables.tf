@@ -9,6 +9,12 @@ variable "control_tower_enrollment_enabled" {
   description = "Set to true, to allow meshStack to enroll Accounts via AWS Control Tower for the meshPlatform."
 }
 
+variable "control_tower_portfolio_id" {
+  type        = string
+  default     = ""
+  description = "Must be set for AWS Control Tower"
+}
+
 variable "replicator_privileged_external_id" {
   type        = string
   description = "Set this variable to a random UUID version 4. The external id is a secondary key to make an AssumeRole API call."
