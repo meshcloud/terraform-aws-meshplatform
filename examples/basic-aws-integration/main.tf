@@ -30,7 +30,7 @@ provider "aws" {
 }
 
 module "meshplatform" {
-  source = "git::https://github.com/meshcloud/terraform-aws-meshplatform.git"
+  source = "../../"
   # note: for production use we recommend using a pinned version of the module like so
   # source = "git::https://github.com/meshcloud/terraform-aws-meshplatform.git?ref=v0.2.0"
 
@@ -42,7 +42,7 @@ module "meshplatform" {
   }
 
   aws_sso_instance_arn                 = "arn:aws:sso:::instance/ssoins-xxxxxxxxxxxxxxx"
-  control_tower_enrollment_enable      = true
+  control_tower_enrollment_enabled     = true
   control_tower_portfolio_id           = "port-xxxxxxxxxxx"
   replicator_privileged_external_id    = "replace with random UUID v4"
   cost_explorer_privileged_external_id = "replace with random UUID v4"
