@@ -32,6 +32,12 @@ variable "control_tower_enrollment_enabled" {
   default     = false
 }
 
+variable "control_tower_portfolio_id" {
+  type        = string
+  default     = ""
+  description = "Must be set for AWS Control Tower"
+}
+
 variable "aws_sso_instance_arn" {
   type        = string
   description = "ARN of the AWS SSO instance to use"

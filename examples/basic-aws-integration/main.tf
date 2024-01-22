@@ -43,6 +43,7 @@ module "meshplatform" {
 
   aws_sso_instance_arn                 = "arn:aws:sso:::instance/ssoins-xxxxxxxxxxxxxxx"
   control_tower_enrollment_enable      = true
+  control_tower_portfolio_id           = "port-xxxxxxxxxxx"
   replicator_privileged_external_id    = "replace with random UUID v4"
   cost_explorer_privileged_external_id = "replace with random UUID v4"
   landing_zone_ou_arns                 = ["arn:aws:organizations::*:ou/o-*/ou-*"]
