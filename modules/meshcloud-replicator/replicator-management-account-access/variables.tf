@@ -26,7 +26,7 @@ variable "privileged_external_id" {
   description = "Privileged external ID for the meshfed-service to use"
 }
 
-variable "aws_enrollment_enabled" {
+variable "control_tower_enrollment_enabled" {
   type        = bool
   description = "Set to true, to allow meshStack to enroll Accounts via AWS Control Tower for the meshPlatform"
   default     = false

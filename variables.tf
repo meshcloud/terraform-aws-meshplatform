@@ -3,7 +3,7 @@ variable "aws_sso_instance_arn" {
   description = "AWS SSO Instance ARN. Needs to be of the form arn:aws:sso:::instance/ssoins-xxxxxxxxxxxxxxx. Setup instructions https://docs.meshcloud.io/docs/meshstack.aws.sso-setup.html."
 }
 
-variable "aws_enrollment_enabled" {
+variable "control_tower_enrollment_enabled" {
   type        = bool
   default     = false
   description = "Set to true, to allow meshStack to enroll Accounts via AWS Control Tower for the meshPlatform."
