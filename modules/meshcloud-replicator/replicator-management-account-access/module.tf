@@ -39,7 +39,7 @@ resource "aws_iam_role_policy_attachment" "meshfed_service_enrollment_additional
   policy_arn = aws_iam_policy.meshfed_service_enrollment_additional[0].arn
 }
 
-resource "aws_servicecatalog_principal_portfolio_association" "example" {
+resource "aws_servicecatalog_principal_portfolio_association" "meshfed_service" {
   count         = var.control_tower_enrollment_enabled ? 1 : 0
   portfolio_id  = var.control_tower_portfolio_id
   principal_arn = aws_iam_role.meshfed_service.arn
