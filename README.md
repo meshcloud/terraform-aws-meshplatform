@@ -18,6 +18,8 @@ This terraform module is used to integrate AWS into a meshStack instance as a me
   - automation account: meshStack will use this account to manage CloudFormation that are used in [Landing Zones](https://docs.meshcloud.io/docs/meshcloud.landing-zones.html).
 - AdministratorAccess in those accounts.
 
+While not strictily necessary, we recommend to configure a [terraform backend](https://developer.hashicorp.com/terraform/language/settings/backends/configuration).
+
 ## Overview of the integration
 
 Here is how the users and roles for the meshplatform fit together:
