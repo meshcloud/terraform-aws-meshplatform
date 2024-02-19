@@ -14,10 +14,10 @@ jobs:
       with:
         terraform_version: 1.0.10
 
-      # note: we can only validate the example atm. see https://github.com/hashicorp/terraform/issues/28490  
+      # note: we can only validate the example atm. see https://github.com/hashicorp/terraform/issues/28490
     - run: terraform init -backend=false
       working-directory: examples/basic-aws-integration
-      
+
     - run: terraform validate
       working-directory: examples/basic-aws-integration
 

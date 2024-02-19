@@ -9,7 +9,7 @@ data "aws_iam_policy_document" "meshcloud_cost_explorer_user_assume_role" {
   statement {
     effect    = "Allow"
     actions   = ["sts:AssumeRole"]
-    resources = ["arn:aws:iam::${var.management_account_id}:role/${var.management_account_service_role_name}"]
+    resources = ["arn:${data.aws_partition.current.partition}:iam::${var.management_account_id}:role/${var.management_account_service_role_name}"]
     condition {
       test     = "StringEquals"
       variable = "sts:ExternalId"

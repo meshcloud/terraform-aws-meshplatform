@@ -10,7 +10,7 @@ data "aws_iam_policy_document" "meshfed_automation_assume_role" {
     effect = "Allow"
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${var.meshcloud_account_id}:user/${var.meshcloud_account_service_user_name}"]
+      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.meshcloud_account_id}:user/${var.meshcloud_account_service_user_name}"]
     }
     actions = ["sts:AssumeRole"]
     condition {
@@ -59,6 +59,6 @@ data "aws_iam_policy_document" "cloudformation_stackset_execution" {
     sid       = "VisualEditor0"
     effect    = "Allow"
     actions   = ["sts:AssumeRole"]
-    resources = ["arn:aws:iam::*:role/AWSCloudFormationStackSetExecutionRole"]
+    resources = ["arn:${data.aws_partition.current.partition}:iam::*:role/AWSCloudFormationStackSetExecutionRole"]
   }
 }
