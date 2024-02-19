@@ -12,13 +12,13 @@ This terraform module is used to integrate AWS into a meshStack instance as a me
 
 - [Terraform installed](https://learn.hashicorp.com/tutorials/terraform/install-cli)
 - [AWS CLI installed](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+- Three accounts to segregate accounts by function.
+  - management account: organization management account, the account that hosts the AWS Organization
+  - meshcloud account: meshStack will use this account to host the IAM users used by meshStack
+  - automation account: meshStack will use this account to manage CloudFormation that are used in [Landing Zones](https://docs.meshcloud.io/docs/meshcloud.landing-zones.html).
+- AdministratorAccess in those accounts.
 
-This module assumes you are following landing zone best practices and segregate accounts by function.
-To call this module, you will need three `aws` providers set up against different accounts
-
-- management account: organization management account, the account that hosts the AWS Organization
-- meshcloud account: meshStack will use this account to host the IAM users used by meshStack
-- automation account: meshStack will use this account to manage CloudFormation that are used in [Landing Zones](https://docs.meshcloud.io/docs/meshcloud.landing-zones.html).
+## Overview of the integration
 
 Here is how the users and roles for the meshplatform fit together:
 
@@ -40,12 +40,10 @@ graph LR;
     replicatorUser--Trusted Entity with External-id-->meshfedAutomationRole
 ```
 
-If you're planning to execute the setup manually, one simple way to set up the required providers is by setting up three
-different profiles on your AWS CLI and include those IAM users' access and secret keys in your `~/.aws/credentials` file
-as described below.
+## How to authenticate against the three accounts
 
-You can also of course set up the `aws` providers any other way you like (e.g. using `assume_role`), as long as you
-pass them when calling the meshPlatform module:
+One way to set up authentication is using three different profiles on your AWS CLI and include those IAM users' access and secret keys in your `~/.aws/credentials` file
+as described below.
 
 ```hcl
 provider aws {
@@ -75,6 +73,8 @@ module "meshplatform" {
   # set input variables
 }
 ```
+
+See the `aws` [provider documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration) for other support authentication methods.
 
 ## Module Structure
 
