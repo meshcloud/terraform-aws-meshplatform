@@ -4,6 +4,8 @@ locals {
 
 data "aws_caller_identity" "current" {}
 
+data "aws_partition" "current" {}
+
 data "aws_iam_policy_document" "cost_explorer_service" {
   version = "2012-10-17"
 

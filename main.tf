@@ -8,8 +8,6 @@ data "aws_caller_identity" "automation" {
   provider = aws.automation
 }
 
-data "aws_partition" "current" {}
-
 module "meshcloud_account_metering_access" {
   source = "./modules/meshcloud-cost-explorer/ce-meshcloud-account-access"
   providers = {

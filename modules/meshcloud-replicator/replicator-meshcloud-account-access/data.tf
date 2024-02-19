@@ -4,6 +4,8 @@ locals {
 
 data "aws_caller_identity" "current" {}
 
+data "aws_partition" "current" {}
+
 data "aws_iam_policy_document" "meshfed_service_user_assume_role" {
   version = "2012-10-17"
   statement {

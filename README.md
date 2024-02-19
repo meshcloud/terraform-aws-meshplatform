@@ -165,10 +165,9 @@ Before opening a Pull Request, we recommend following the below steps to get a f
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.33.0 |
-| <a name="provider_aws.automation"></a> [aws.automation](#provider\_aws.automation) | 5.33.0 |
-| <a name="provider_aws.management"></a> [aws.management](#provider\_aws.management) | 5.33.0 |
-| <a name="provider_aws.meshcloud"></a> [aws.meshcloud](#provider\_aws.meshcloud) | 5.33.0 |
+| <a name="provider_aws.automation"></a> [aws.automation](#provider\_aws.automation) | 5.37.0 |
+| <a name="provider_aws.management"></a> [aws.management](#provider\_aws.management) | 5.37.0 |
+| <a name="provider_aws.meshcloud"></a> [aws.meshcloud](#provider\_aws.meshcloud) | 5.37.0 |
 
 ## Modules
 
@@ -187,7 +186,6 @@ Before opening a Pull Request, we recommend following the below steps to get a f
 | [aws_caller_identity.automation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_caller_identity.management](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_caller_identity.meshcloud](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
-| [aws_partition.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/partition) | data source |
 
 ## Inputs
 
