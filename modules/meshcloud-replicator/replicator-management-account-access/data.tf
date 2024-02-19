@@ -10,7 +10,7 @@ data "aws_iam_policy_document" "meshfed_service" {
     sid       = "StsAccessMemberAccount"
     effect    = "Allow"
     actions   = ["sts:AssumeRole"]
-    resources = ["arn:aws:iam::*:role/${var.meshstack_access_role_name}"]
+    resources = ["arn:${data.aws_partition.current.partition}:iam::*:role/${var.meshstack_access_role_name}"]
     condition {
       test     = "StringEquals"
       variable = "sts:ExternalId"
@@ -30,9 +30,9 @@ data "aws_iam_policy_document" "meshfed_service" {
       "organizations:ListTagsForResource"
     ]
     resources = [
-      "arn:aws:organizations::*:account/o-*/*",
-      "arn:aws:organizations::*:ou/o-*/ou-*",
-      "arn:aws:organizations::${local.account_id}:root/o-*/r-*"
+      "arn:${data.aws_partition.current.partition}:organizations::*:account/o-*/*",
+      "arn:${data.aws_partition.current.partition}:organizations::*:ou/o-*/ou-*",
+      "arn:${data.aws_partition.current.partition}:organizations::${local.account_id}:root/o-*/r-*"
     ]
   }
 
@@ -49,9 +49,9 @@ data "aws_iam_policy_document" "meshfed_service" {
         # The actions organizations:TagResource and organizations:UntagResource act on accounts.
         # The actions can not be restricted to a subtree of the OU hierarchy. This is a limitation in the permission model of AWS Organization Service.
         # To supprt tagging for this meshPlatform we need to allow both actions on all accounts.
-        "arn:aws:organizations::*:account/o-*/*",
+        "arn:${data.aws_partition.current.partition}:organizations::*:account/o-*/*",
         # New accounts need to be moved from root to the target OU.
-        "arn:aws:organizations::${local.account_id}:root/o-*/r-*"
+        "arn:${data.aws_partition.current.partition}:organizations::${local.account_id}:root/o-*/r-*"
       ],
     var.landing_zone_ou_arns)
   }
@@ -80,8 +80,8 @@ data "aws_iam_policy_document" "meshfed_service" {
     ]
     resources = [
       "${var.aws_sso_instance_arn}",
-      "arn:aws:sso:::permissionSet/*/*",
-      "arn:aws:sso:::account/*"
+      "arn:${data.aws_partition.current.partition}:sso:::permissionSet/*/*",
+      "arn:${data.aws_partition.current.partition}:sso:::account/*"
     ]
   }
 
@@ -99,8 +99,8 @@ data "aws_iam_policy_document" "meshfed_service" {
         "iam:GetSAMLProvider"
       ]
       resources = [
-        "arn:aws:iam::${local.account_id}:saml-provider/*",
-        "arn:aws:iam::${local.account_id}:role/*"
+        "arn:${data.aws_partition.current.partition}:iam::${local.account_id}:saml-provider/*",
+        "arn:${data.aws_partition.current.partition}:iam::${local.account_id}:role/*"
       ]
     }
   }
@@ -112,7 +112,7 @@ data "aws_iam_policy_document" "meshfed_service_assume_role" {
     effect = "Allow"
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${var.meshcloud_account_id}:user/${var.meshcloud_account_service_user_name}"]
+      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.meshcloud_account_id}:user/${var.meshcloud_account_service_user_name}"]
     }
     actions = ["sts:AssumeRole"]
     condition {

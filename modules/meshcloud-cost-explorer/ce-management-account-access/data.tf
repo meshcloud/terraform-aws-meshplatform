@@ -39,7 +39,7 @@ data "aws_iam_policy_document" "cost_explorer_service_assume_role" {
     effect = "Allow"
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${var.meshcloud_account_id}:user/${var.meshcloud_account_service_user_name}"]
+      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.meshcloud_account_id}:user/${var.meshcloud_account_service_user_name}"]
     }
     actions = ["sts:AssumeRole"]
     condition {
