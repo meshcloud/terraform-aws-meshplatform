@@ -8,6 +8,7 @@ data "aws_partition" "current" {}
 
 data "aws_iam_policy_document" "meshfed_service_user_assume_role" {
   version = "2012-10-17"
+
   statement {
     effect    = "Allow"
     actions   = ["sts:AssumeRole"]
@@ -27,6 +28,34 @@ data "aws_iam_policy_document" "meshfed_service_user_assume_role" {
       test     = "StringEquals"
       variable = "sts:ExternalId"
       values   = [var.privileged_external_id]
+    }
+  }
+}
+
+data "aws_iam_policy_document" "workload_identity_federation" {
+  count   = var.workload_identity_federation == null ? 0 : 1
+  version = "2012-10-17"
+
+  statement {
+    effect = "Allow"
+    principals {
+      type        = "Federated"
+      identifiers = [var.workload_identity_federation.identity_provider_arn]
+    }
+    actions = ["sts:AssumeRoleWithWebIdentity"]
+
+    condition {
+      test     = "StringEquals"
+      variable = "${trimprefix(var.workload_identity_federation.issuer, "https://")}:aud"
+
+      values = [var.workload_identity_federation.audience]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "${trimprefix(var.workload_identity_federation.issuer, "https://")}:sub"
+
+      values = [var.workload_identity_federation.subject]
     }
   }
 }

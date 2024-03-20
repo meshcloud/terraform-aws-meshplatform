@@ -79,3 +79,21 @@ variable "support_root_account_via_aws_sso" {
   default     = false
   description = "Set to true to allow meshStack to manage the Organization's AWS Root account's access via AWS SSO."
 }
+
+variable "create_access_keys" {
+  type        = bool
+  default     = true
+  description = "Set to false to disable creation of any service account access keys."
+}
+
+variable "workload_identity_federation" {
+  type = object({
+    issuer             = string,
+    audience           = string,
+    thumbprint         = string,
+    replicator_subject = string,
+    kraken_subject     = string
+  })
+  default     = null
+  description = "Set these options to add a trusted identity provider from meshStack to allow workload identity federation for authentication which can be used instead of access keys."
+}

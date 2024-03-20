@@ -30,3 +30,19 @@ variable "privileged_external_id" {
   type        = string
   description = "Privileged external ID for the meshfed-service to use"
 }
+
+variable "create_access_key" {
+  type        = bool
+  description = "Create access key for service account"
+  default     = true
+}
+
+variable "workload_identity_federation" {
+  type = object({
+    issuer                = string,
+    audience              = string,
+    subject               = string,
+    identity_provider_arn = string
+  })
+  default = null
+}

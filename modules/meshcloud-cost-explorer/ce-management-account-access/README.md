@@ -9,7 +9,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.37.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 2.7.0 |
 
 ## Modules
 
@@ -31,6 +31,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_allow_federated_role"></a> [allow\_federated\_role](#input\_allow\_federated\_role) | n/a | `bool` | `false` | no |
 | <a name="input_management_account_service_role_name"></a> [management\_account\_service\_role\_name](#input\_management\_account\_service\_role\_name) | Name of the custom role in the management account used by the cost explorer user. | `string` | `"MeshCostExplorerServiceRole"` | no |
 | <a name="input_meshcloud_account_id"></a> [meshcloud\_account\_id](#input\_meshcloud\_account\_id) | The ID of the meshcloud AWS Account. | `string` | n/a | yes |
 | <a name="input_meshcloud_account_service_user_name"></a> [meshcloud\_account\_service\_user\_name](#input\_meshcloud\_account\_service\_user\_name) | Name of the user using cost explorer service to collect metering data. | `string` | `"meshcloud-cost-explorer-user"` | no |
