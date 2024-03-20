@@ -19,3 +19,8 @@ variable "privileged_external_id" {
   type        = string
   description = "Privileged external ID for the meshfed-service to use"
 }
+
+variable "allow_federated_role" {
+  type    = bool
+  default = false
+}

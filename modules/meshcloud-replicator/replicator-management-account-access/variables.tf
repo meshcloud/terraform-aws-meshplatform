@@ -56,3 +56,8 @@ variable "landing_zone_ou_arns" {
     "arn:aws:organizations::*:ou/o-*/ou-*"
   ]
 }
+
+variable "allow_federated_role" {
+  type    = bool
+  default = false
+}

@@ -37,6 +37,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_allow_federated_role"></a> [allow\_federated\_role](#input\_allow\_federated\_role) | n/a | `bool` | `false` | no |
 | <a name="input_aws_sso_instance_arn"></a> [aws\_sso\_instance\_arn](#input\_aws\_sso\_instance\_arn) | ARN of the AWS SSO instance to use | `string` | n/a | yes |
 | <a name="input_control_tower_enrollment_enabled"></a> [control\_tower\_enrollment\_enabled](#input\_control\_tower\_enrollment\_enabled) | Set to true, to allow meshStack to enroll Accounts via AWS Control Tower for the meshPlatform | `bool` | `false` | no |
 | <a name="input_control_tower_portfolio_id"></a> [control\_tower\_portfolio\_id](#input\_control\_tower\_portfolio\_id) | Must be set for AWS Control Tower | `string` | `""` | no |

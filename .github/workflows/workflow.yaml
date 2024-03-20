@@ -7,18 +7,18 @@ jobs:
     name: Validate
     runs-on: ubuntu-latest
     steps:
-    - name: Check out code
-      uses: actions/checkout@v1
+      - name: Check out code
+        uses: actions/checkout@v1
 
-    - uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_version: 1.0.10
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.5"
 
-      # note: we can only validate the example atm. see https://github.com/hashicorp/terraform/issues/28490
-    - run: terraform init -backend=false
-      working-directory: examples/basic-aws-integration
+        # note: we can only validate the example atm. see https://github.com/hashicorp/terraform/issues/28490
+      - run: terraform init -backend=false
+        working-directory: examples/basic-aws-integration
 
-    - run: terraform validate
-      working-directory: examples/basic-aws-integration
+      - run: terraform validate
+        working-directory: examples/basic-aws-integration
 
-    - run: terraform fmt -recursive -check
+      - run: terraform fmt -recursive -check

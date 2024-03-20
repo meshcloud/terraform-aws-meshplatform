@@ -37,6 +37,10 @@ output "replicator_privileged_external_id" {
   sensitive   = true
 }
 
+output "replicator_workload_identity_federation_role" {
+  value = var.workload_identity_federation == null ? null : module.meshcloud_account_replicator_access.workload_identity_federation_role
+}
+
 output "meshstack_access_role_name" {
   description = "The name for the Account Access Role that will be rolled out to all managed accounts."
   value       = module.management_account_replicator_access.meshstack_access_role_name

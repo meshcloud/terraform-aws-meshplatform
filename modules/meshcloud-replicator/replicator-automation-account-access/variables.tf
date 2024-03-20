@@ -19,3 +19,8 @@ variable "automation_account_service_role_name" {
   default     = "MeshfedAutomationRole"
   description = "Name of the custom role in the automation account. See https://docs.meshcloud.io/docs/meshstack.how-to.integrate-meshplatform-aws-manually.html#set-up-aws-account-3-automation"
 }
+
+variable "allow_federated_role" {
+  type    = bool
+  default = false
+}
