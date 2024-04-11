@@ -63,3 +63,7 @@ output "cost_explorer_privileged_external_id" {
   description = "Cost explorer privileged_external_id"
   sensitive   = true
 }
+
+output "cost_explorer_identity_federation_role" {
+  value = var.workload_identity_federation == null ? null : module.meshcloud_account_metering_access.workload_identity_federation_role
+}
