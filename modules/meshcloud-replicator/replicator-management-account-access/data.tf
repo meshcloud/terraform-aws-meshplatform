@@ -115,7 +115,10 @@ data "aws_iam_policy_document" "meshfed_service" {
         "iam:GetRole",
         "iam:ListAttachedRolePolicies",
         "iam:ListRolePolicies",
-        "iam:GetSAMLProvider"
+        "iam:GetSAMLProvider",
+        "iam:CreateRole",
+        "iam:AttachRolePolicy",
+        "iam:UpdateAssumeRolePolicy"
       ]
       resources = [
         "arn:${data.aws_partition.current.partition}:iam::${local.account_id}:saml-provider/*",
