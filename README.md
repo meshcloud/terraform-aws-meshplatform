@@ -165,9 +165,9 @@ Before opening a Pull Request, we recommend following the below steps to get a f
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws.automation"></a> [aws.automation](#provider\_aws.automation) | 5.41.0 |
-| <a name="provider_aws.management"></a> [aws.management](#provider\_aws.management) | 5.41.0 |
-| <a name="provider_aws.meshcloud"></a> [aws.meshcloud](#provider\_aws.meshcloud) | 5.41.0 |
+| <a name="provider_aws.automation"></a> [aws.automation](#provider\_aws.automation) | >= 2.7.0 |
+| <a name="provider_aws.management"></a> [aws.management](#provider\_aws.management) | >= 2.7.0 |
+| <a name="provider_aws.meshcloud"></a> [aws.meshcloud](#provider\_aws.meshcloud) | >= 2.7.0 |
 
 ## Modules
 
@@ -194,6 +194,7 @@ Before opening a Pull Request, we recommend following the below steps to get a f
 |------|-------------|------|---------|:--------:|
 | <a name="input_automation_account_service_role_name"></a> [automation\_account\_service\_role\_name](#input\_automation\_account\_service\_role\_name) | Name of the custom role in the automation account. See https://docs.meshcloud.io/docs/meshstack.how-to.integrate-meshplatform-aws-manually.html#set-up-aws-account-3-automation | `string` | `"MeshfedAutomationRole"` | no |
 | <a name="input_aws_sso_instance_arn"></a> [aws\_sso\_instance\_arn](#input\_aws\_sso\_instance\_arn) | AWS SSO Instance ARN. Needs to be of the form arn:aws:sso:::instance/ssoins-xxxxxxxxxxxxxxx. Setup instructions https://docs.meshcloud.io/docs/meshstack.aws.sso-setup.html. | `string` | n/a | yes |
+| <a name="input_can_close_accounts_in_resource_org_paths"></a> [can\_close\_accounts\_in\_resource\_org\_paths](#input\_can\_close\_accounts\_in\_resource\_org\_paths) | AWS ResourceOrgPaths that are used in Landing Zones and where meshStack is allowed to close accounts. | `list(string)` | `[]` | no |
 | <a name="input_control_tower_enrollment_enabled"></a> [control\_tower\_enrollment\_enabled](#input\_control\_tower\_enrollment\_enabled) | Set to true, to allow meshStack to enroll Accounts via AWS Control Tower for the meshPlatform. | `bool` | `false` | no |
 | <a name="input_control_tower_portfolio_id"></a> [control\_tower\_portfolio\_id](#input\_control\_tower\_portfolio\_id) | Must be set for AWS Control Tower | `string` | `""` | no |
 | <a name="input_cost_explorer_management_account_service_role_name"></a> [cost\_explorer\_management\_account\_service\_role\_name](#input\_cost\_explorer\_management\_account\_service\_role\_name) | Name of the custom role in the management account used by the cost explorer user. | `string` | `"MeshCostExplorerServiceRole"` | no |
@@ -212,6 +213,7 @@ Before opening a Pull Request, we recommend following the below steps to get a f
 | Name | Description |
 |------|-------------|
 | <a name="output_automation_account_id"></a> [automation\_account\_id](#output\_automation\_account\_id) | Automation Account ID |
+| <a name="output_cost_explorer_identity_federation_role"></a> [cost\_explorer\_identity\_federation\_role](#output\_cost\_explorer\_identity\_federation\_role) | n/a |
 | <a name="output_cost_explorer_management_account_role_arn"></a> [cost\_explorer\_management\_account\_role\_arn](#output\_cost\_explorer\_management\_account\_role\_arn) | Amazon Resource Name (ARN) of Management Account Role for replicator |
 | <a name="output_cost_explorer_privileged_external_id"></a> [cost\_explorer\_privileged\_external\_id](#output\_cost\_explorer\_privileged\_external\_id) | Cost explorer privileged\_external\_id |
 | <a name="output_management_account_id"></a> [management\_account\_id](#output\_management\_account\_id) | Management Account ID |
