@@ -9,7 +9,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 2.7.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.21.0 |
 
 ## Modules
 
@@ -39,9 +39,10 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_allow_federated_role"></a> [allow\_federated\_role](#input\_allow\_federated\_role) | n/a | `bool` | `false` | no |
 | <a name="input_aws_sso_instance_arn"></a> [aws\_sso\_instance\_arn](#input\_aws\_sso\_instance\_arn) | ARN of the AWS SSO instance to use | `string` | n/a | yes |
+| <a name="input_can_close_accounts_in_resource_org_paths"></a> [can\_close\_accounts\_in\_resource\_org\_paths](#input\_can\_close\_accounts\_in\_resource\_org\_paths) | AWS ResourceOrgPaths that are used in Landing Zones and where meshStack is allowed to close accounts. | `list(string)` | `[]` | no |
 | <a name="input_control_tower_enrollment_enabled"></a> [control\_tower\_enrollment\_enabled](#input\_control\_tower\_enrollment\_enabled) | Set to true, to allow meshStack to enroll Accounts via AWS Control Tower for the meshPlatform | `bool` | `false` | no |
 | <a name="input_control_tower_portfolio_id"></a> [control\_tower\_portfolio\_id](#input\_control\_tower\_portfolio\_id) | Must be set for AWS Control Tower | `string` | `""` | no |
-| <a name="input_landing_zone_ou_arns"></a> [landing\_zone\_ou\_arns](#input\_landing\_zone\_ou\_arns) | Organizational Unit ARNs that are used in Landing Zones. We recommend to explicitly list the OU ARNs that meshStack should manage. | `list(string)` | <pre>[<br>  "arn:aws:organizations::*:ou/o-*/ou-*"<br>]</pre> | no |
+| <a name="input_landing_zone_ou_arns"></a> [landing\_zone\_ou\_arns](#input\_landing\_zone\_ou\_arns) | Organizational Unit ARNs that are used in Landing Zones. We recommend to explicitly list the OU ARNs that meshStack should manage. | `list(string)` | `[]` | no |
 | <a name="input_management_account_service_role_name"></a> [management\_account\_service\_role\_name](#input\_management\_account\_service\_role\_name) | Name of the custom role in the management account. See https://docs.meshcloud.io/docs/meshstack.how-to.integrate-meshplatform-aws-manually.html#set-up-aws-account-2-management | `string` | `"MeshfedServiceRole"` | no |
 | <a name="input_meshcloud_account_id"></a> [meshcloud\_account\_id](#input\_meshcloud\_account\_id) | The ID of the meshcloud AWS Account | `string` | n/a | yes |
 | <a name="input_meshcloud_account_service_user_name"></a> [meshcloud\_account\_service\_user\_name](#input\_meshcloud\_account\_service\_user\_name) | Name of the meshfed-service user. This user is responsible for replication. | `string` | `"meshfed-service-user"` | no |

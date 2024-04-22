@@ -39,6 +39,13 @@ variable "landing_zone_ou_arns" {
   default     = ["arn:aws:organizations::*:ou/o-*/ou-*"]
 }
 
+variable "can_close_accounts_in_resource_org_paths" {
+  type = list(string)
+  // see https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourceorgpaths
+  description = "AWS ResourceOrgPaths that are used in Landing Zones and where meshStack is allowed to close accounts."
+  default     = [] // example: o-a1b2c3d4e5/r-f6g7h8i9j0example/ou-ghi0-awsccccc/ou-jkl0-awsddddd/
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS
 # These parameters have reasonable defaults.

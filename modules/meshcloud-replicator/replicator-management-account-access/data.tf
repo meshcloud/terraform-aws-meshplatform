@@ -50,12 +50,29 @@ data "aws_iam_policy_document" "meshfed_service" {
       [
         # The actions organizations:TagResource and organizations:UntagResource act on accounts.
         # The actions can not be restricted to a subtree of the OU hierarchy. This is a limitation in the permission model of AWS Organization Service.
-        # To supprt tagging for this meshPlatform we need to allow both actions on all accounts.
+        # To support tagging for this meshPlatform we need to allow both actions on all accounts.
         "arn:${data.aws_partition.current.partition}:organizations::*:account/o-*/*",
         # New accounts need to be moved from root to the target OU.
         "arn:${data.aws_partition.current.partition}:organizations::${local.account_id}:root/o-*/r-*"
       ],
     var.landing_zone_ou_arns)
+  }
+
+  statement {
+    sid    = "OrgManagementAccessCloseAccount"
+    effect = "Allow"
+    actions = [
+      "organizations:CloseAccount"
+    ]
+    resources = [
+      // allow acting on any account owned by this org
+      "arn:${data.aws_partition.current.partition}:organizations::*:account/o-*/*",
+    ]
+    condition {
+      test     = "ForAnyValue:StringLike"
+      variable = "aws:ResourceOrgPaths"
+      values   = var.can_close_accounts_in_resource_org_paths
+    }
   }
 
   statement {
