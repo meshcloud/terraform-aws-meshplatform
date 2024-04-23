@@ -3,9 +3,9 @@ output "management_account_id" {
   description = "Management Account ID"
 }
 
-output "meshcloud_account_id" {
-  value       = module.meshplatform.meshcloud_account_id
-  description = "Meshcloud Account ID"
+output "meshstack_account_id" {
+  value       = module.meshplatform.meshstack_account_id
+  description = "meshstack account ID"
 }
 
 output "automation_account_id" {

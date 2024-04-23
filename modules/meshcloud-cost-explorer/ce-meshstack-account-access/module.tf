@@ -1,6 +1,6 @@
-# meshcloud Account Setup
+# meshstack Account Setup
 resource "aws_iam_user" "meshcloud_cost_explorer" {
-  name = var.meshcloud_account_service_user_name
+  name = var.meshstack_account_service_user_name
 }
 
 resource "aws_iam_access_key" "meshcloud_cost_explorer" {

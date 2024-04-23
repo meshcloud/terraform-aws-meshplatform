@@ -1,10 +1,10 @@
-variable "meshcloud_account_service_user_name" {
+variable "meshstack_account_service_user_name" {
   type        = string
   default     = "meshfed-service-user"
   description = "Name of the meshfed-service user. This user is responsible for replication."
 }
 
-variable "meshcloud_account_id" {
+variable "meshstack_account_id" {
   type        = string
   description = "The ID of the meshcloud AWS Account."
 }

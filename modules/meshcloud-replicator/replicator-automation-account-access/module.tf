@@ -1,7 +1,7 @@
 # Automation Account Setup
 resource "aws_iam_role" "meshfed_automation" {
   name               = var.automation_account_service_role_name
-  description        = "This role is assumed by ${var.meshcloud_account_service_user_name} to administer CloudFormation."
+  description        = "This role is assumed by ${var.meshstack_account_service_user_name} to administer CloudFormation."
   assume_role_policy = data.aws_iam_policy_document.meshfed_automation_assume_role.json
 }
 

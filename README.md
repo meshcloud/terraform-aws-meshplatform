@@ -14,7 +14,7 @@ This terraform module is used to integrate AWS into a meshStack instance as a me
 - [AWS CLI installed](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 - Three accounts to segregate accounts by function.
   - management account: organization management account, the account that hosts the AWS Organization
-  - meshcloud account: meshStack will use this account to host the IAM users used by meshStack
+  - meshstack account: meshStack will use this account to host the IAM users used by meshStack
   - automation account: meshStack will use this account to manage CloudFormation templates that are used in [Landing Zones](https://docs.meshcloud.io/docs/meshcloud.landing-zones.html).
 - AdministratorAccess in those accounts.
 
@@ -30,7 +30,7 @@ graph LR;
         meshfedServiceRole("🪖 MeshfedServiceRole");
         costExplorerServiceRole("🪖 MeshCostExplorerServiceRole");
     end
-    subgraph meshcloud Account
+    subgraph meshstack Account
         replicatorUser["👤 ReplicatorUser & AccessKey"];
         costExplorerUser["👤 CostExplorerUser & AccessKey"];
     end
@@ -54,8 +54,8 @@ provider aws {
 }
 
 provider aws {
-  alias = "meshcloud"
-  profile = "meshcloud"
+  alias = "meshstack"
+  profile = "meshstack"
 }
 
 provider aws {
@@ -68,7 +68,7 @@ module "meshplatform" {
 
   providers = {
     aws.management = aws.management
-    aws.meshcloud  = aws.meshcloud
+    aws.meshstack  = aws.meshstack
     aws.automation = aws.automation
   }
 
@@ -167,9 +167,9 @@ Before opening a Pull Request, we recommend following the below steps to get a f
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws.automation"></a> [aws.automation](#provider\_aws.automation) | 5.41.0 |
-| <a name="provider_aws.management"></a> [aws.management](#provider\_aws.management) | 5.41.0 |
-| <a name="provider_aws.meshcloud"></a> [aws.meshcloud](#provider\_aws.meshcloud) | 5.41.0 |
+| <a name="provider_aws.automation"></a> [aws.automation](#provider\_aws.automation) | 5.37.0 |
+| <a name="provider_aws.management"></a> [aws.management](#provider\_aws.management) | 5.37.0 |
+| <a name="provider_aws.meshstack"></a> [aws.meshstack](#provider\_aws.meshstack) | 5.37.0 |
 
 ## Modules
 
@@ -178,8 +178,8 @@ Before opening a Pull Request, we recommend following the below steps to get a f
 | <a name="module_automation_account_replicator_access"></a> [automation\_account\_replicator\_access](#module\_automation\_account\_replicator\_access) | ./modules/meshcloud-replicator/replicator-automation-account-access | n/a |
 | <a name="module_management_account_metering_access"></a> [management\_account\_metering\_access](#module\_management\_account\_metering\_access) | ./modules/meshcloud-cost-explorer/ce-management-account-access | n/a |
 | <a name="module_management_account_replicator_access"></a> [management\_account\_replicator\_access](#module\_management\_account\_replicator\_access) | ./modules/meshcloud-replicator/replicator-management-account-access | n/a |
-| <a name="module_meshcloud_account_metering_access"></a> [meshcloud\_account\_metering\_access](#module\_meshcloud\_account\_metering\_access) | ./modules/meshcloud-cost-explorer/ce-meshcloud-account-access | n/a |
-| <a name="module_meshcloud_account_replicator_access"></a> [meshcloud\_account\_replicator\_access](#module\_meshcloud\_account\_replicator\_access) | ./modules/meshcloud-replicator/replicator-meshcloud-account-access | n/a |
+| <a name="module_meshstack_account_metering_access"></a> [meshstack\_account\_metering\_access](#module\_meshstack\_account\_metering\_access) | ./modules/meshcloud-cost-explorer/ce-meshstack-account-access | n/a |
+| <a name="module_meshstack_account_replicator_access"></a> [meshstack\_account\_replicator\_access](#module\_meshstack\_account\_replicator\_access) | ./modules/meshcloud-replicator/replicator-meshstack-account-access | n/a |
 
 ## Resources
 
@@ -188,7 +188,7 @@ Before opening a Pull Request, we recommend following the below steps to get a f
 | [aws_iam_openid_connect_provider.meshstack](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_openid_connect_provider) | resource |
 | [aws_caller_identity.automation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_caller_identity.management](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
-| [aws_caller_identity.meshcloud](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [aws_caller_identity.meshstack](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 
 ## Inputs
 
@@ -199,12 +199,12 @@ Before opening a Pull Request, we recommend following the below steps to get a f
 | <a name="input_control_tower_enrollment_enabled"></a> [control\_tower\_enrollment\_enabled](#input\_control\_tower\_enrollment\_enabled) | Set to true, to allow meshStack to enroll Accounts via AWS Control Tower for the meshPlatform. | `bool` | `false` | no |
 | <a name="input_control_tower_portfolio_id"></a> [control\_tower\_portfolio\_id](#input\_control\_tower\_portfolio\_id) | Must be set for AWS Control Tower | `string` | `""` | no |
 | <a name="input_cost_explorer_management_account_service_role_name"></a> [cost\_explorer\_management\_account\_service\_role\_name](#input\_cost\_explorer\_management\_account\_service\_role\_name) | Name of the custom role in the management account used by the cost explorer user. | `string` | `"MeshCostExplorerServiceRole"` | no |
-| <a name="input_cost_explorer_meshcloud_account_service_user_name"></a> [cost\_explorer\_meshcloud\_account\_service\_user\_name](#input\_cost\_explorer\_meshcloud\_account\_service\_user\_name) | Name of the user using cost explorer service to collect metering data. | `string` | `"meshcloud-cost-explorer-user"` | no |
+| <a name="input_cost_explorer_meshstack_account_service_user_name"></a> [cost\_explorer\_meshstack\_account\_service\_user\_name](#input\_cost\_explorer\_meshstack\_account\_service\_user\_name) | Name of the user using cost explorer service to collect metering data. | `string` | `"meshcloud-cost-explorer-user"` | no |
 | <a name="input_cost_explorer_privileged_external_id"></a> [cost\_explorer\_privileged\_external\_id](#input\_cost\_explorer\_privileged\_external\_id) | Set this variable to a random UUID version 4. The external id is a secondary key to make an AssumeRole API call. | `string` | n/a | yes |
 | <a name="input_create_access_keys"></a> [create\_access\_keys](#input\_create\_access\_keys) | Set to false to disable creation of any service account access keys. | `bool` | `true` | no |
 | <a name="input_landing_zone_ou_arns"></a> [landing\_zone\_ou\_arns](#input\_landing\_zone\_ou\_arns) | Organizational Unit ARNs that are used in Landing Zones. We recommend to explicitly list the OU ARNs that meshStack should manage. | `list(string)` | <pre>[<br>  "arn:aws:organizations::*:ou/o-*/ou-*"<br>]</pre> | no |
 | <a name="input_management_account_service_role_name"></a> [management\_account\_service\_role\_name](#input\_management\_account\_service\_role\_name) | Name of the custom role in the management account. See https://docs.meshcloud.io/docs/meshstack.how-to.integrate-meshplatform-aws-manually.html#set-up-aws-account-2-management | `string` | `"MeshfedServiceRole"` | no |
-| <a name="input_meshcloud_account_service_user_name"></a> [meshcloud\_account\_service\_user\_name](#input\_meshcloud\_account\_service\_user\_name) | Name of the meshfed-service user. This user is responsible for replication. | `string` | `"meshfed-service-user"` | no |
+| <a name="input_meshstack_account_service_user_name"></a> [meshstack\_account\_service\_user\_name](#input\_meshstack\_account\_service\_user\_name) | Name of the meshfed-service user. This user is responsible for replication. | `string` | `"meshfed-service-user"` | no |
 | <a name="input_replicator_privileged_external_id"></a> [replicator\_privileged\_external\_id](#input\_replicator\_privileged\_external\_id) | Set this variable to a random UUID version 4. The external id is a secondary key to make an AssumeRole API call. | `string` | n/a | yes |
 | <a name="input_support_root_account_via_aws_sso"></a> [support\_root\_account\_via\_aws\_sso](#input\_support\_root\_account\_via\_aws\_sso) | Set to true to allow meshStack to manage the Organization's AWS Root account's access via AWS SSO. | `bool` | `false` | no |
 | <a name="input_workload_identity_federation"></a> [workload\_identity\_federation](#input\_workload\_identity\_federation) | Set these options to add a trusted identity provider from meshStack to allow workload identity federation for authentication which can be used instead of access keys. | <pre>object({<br>    issuer             = string,<br>    audience           = string,<br>    thumbprint         = string,<br>    replicator_subject = string,<br>    kraken_subject     = string<br>  })</pre> | `null` | no |
@@ -214,11 +214,12 @@ Before opening a Pull Request, we recommend following the below steps to get a f
 | Name | Description |
 |------|-------------|
 | <a name="output_automation_account_id"></a> [automation\_account\_id](#output\_automation\_account\_id) | Automation Account ID |
+| <a name="output_cost_explorer_identity_federation_role"></a> [cost\_explorer\_identity\_federation\_role](#output\_cost\_explorer\_identity\_federation\_role) | n/a |
 | <a name="output_cost_explorer_management_account_role_arn"></a> [cost\_explorer\_management\_account\_role\_arn](#output\_cost\_explorer\_management\_account\_role\_arn) | Amazon Resource Name (ARN) of Management Account Role for replicator |
 | <a name="output_cost_explorer_privileged_external_id"></a> [cost\_explorer\_privileged\_external\_id](#output\_cost\_explorer\_privileged\_external\_id) | Cost explorer privileged\_external\_id |
 | <a name="output_management_account_id"></a> [management\_account\_id](#output\_management\_account\_id) | Management Account ID |
-| <a name="output_meshcloud_account_id"></a> [meshcloud\_account\_id](#output\_meshcloud\_account\_id) | Meshcloud Account ID |
 | <a name="output_meshstack_access_role_name"></a> [meshstack\_access\_role\_name](#output\_meshstack\_access\_role\_name) | The name for the Account Access Role that will be rolled out to all managed accounts. |
+| <a name="output_meshstack_account_id"></a> [meshstack\_account\_id](#output\_meshstack\_account\_id) | meshstack account ID |
 | <a name="output_metering_aws_iam_keys"></a> [metering\_aws\_iam\_keys](#output\_metering\_aws\_iam\_keys) | You can access your credentials when you execute `terraform output metering_aws_iam_keys` command |
 | <a name="output_replicator_automation_account_role_arn"></a> [replicator\_automation\_account\_role\_arn](#output\_replicator\_automation\_account\_role\_arn) | Amazon Resource Name (ARN) of Automation Account Role for replicator |
 | <a name="output_replicator_aws_iam_keys"></a> [replicator\_aws\_iam\_keys](#output\_replicator\_aws\_iam\_keys) | You can access your credentials when you execute `terraform output replicator_aws_iam_keys` command |

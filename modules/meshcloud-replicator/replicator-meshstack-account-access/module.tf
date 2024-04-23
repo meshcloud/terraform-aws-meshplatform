@@ -1,6 +1,6 @@
-# meshcloud Account Setup
+# meshstack Account Setup
 resource "aws_iam_user" "meshfed_service" {
-  name = var.meshcloud_account_service_user_name
+  name = var.meshstack_account_service_user_name
 }
 
 resource "aws_iam_access_key" "meshfed_service" {

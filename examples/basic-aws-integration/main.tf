@@ -4,15 +4,15 @@
 #
 # Remove/comment the backend block below if you are only testing the module.
 # Please be aware that you cannot destroy the created resources via terraform if you lose the state file.
-terraform {
-  backend "s3" {
-    region  = "eu-west-1"
-    profile = "myprofile"
-    bucket  = "cloudfoundation-tfstates"
-    key     = "meshstack/platforms/aws"
-    encrypt = true
-  }
-}
+# terraform {
+#   backend "s3" {
+#     region  = "eu-west-1"
+#     profile = "myprofile"
+#     bucket  = "cloudfoundation-tfstates"
+#     key     = "meshstack/platforms/aws"
+#     encrypt = true
+#   }
+# }
 
 provider "aws" {
   alias   = "management"
@@ -20,8 +20,8 @@ provider "aws" {
 }
 
 provider "aws" {
-  alias   = "meshcloud"
-  profile = "meshcloud"
+  alias   = "meshstack"
+  profile = "meshstack"
 }
 
 provider "aws" {
@@ -37,7 +37,7 @@ module "meshplatform" {
 
   providers = {
     aws.management = aws.management
-    aws.meshcloud  = aws.meshcloud
+    aws.meshstack  = aws.meshstack
     aws.automation = aws.automation
   }
 
