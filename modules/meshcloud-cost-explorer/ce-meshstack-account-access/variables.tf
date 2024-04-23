@@ -4,7 +4,7 @@ variable "management_account_service_role_name" {
   description = "Name of the custom role in the management account used by the cost explorer user."
 }
 
-variable "meshcloud_account_service_user_name" {
+variable "meshstack_account_service_user_name" {
   type        = string
   default     = "meshcloud-cost-explorer-user"
   description = "Name of the user using cost explorer service to collect metering data."

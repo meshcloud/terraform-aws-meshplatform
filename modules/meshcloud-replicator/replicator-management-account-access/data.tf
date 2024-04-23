@@ -115,7 +115,7 @@ data "aws_iam_policy_document" "meshfed_service_assume_role" {
 
     principals {
       type        = "AWS"
-      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.meshcloud_account_id}:user/${var.meshcloud_account_service_user_name}"]
+      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.meshstack_account_id}:user/${var.meshstack_account_service_user_name}"]
     }
 
     dynamic "principals" {
@@ -123,7 +123,7 @@ data "aws_iam_policy_document" "meshfed_service_assume_role" {
 
       content {
         type        = "AWS"
-        identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.meshcloud_account_id}:role/${var.meshcloud_account_service_user_name}IdentityFederation"]
+        identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.meshstack_account_id}:role/${var.meshstack_account_service_user_name}IdentityFederation"]
       }
     }
 

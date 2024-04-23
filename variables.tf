@@ -44,7 +44,7 @@ variable "landing_zone_ou_arns" {
 # These parameters have reasonable defaults.
 # ---------------------------------------------------------------------------------------------------------------------
 
-variable "meshcloud_account_service_user_name" {
+variable "meshstack_account_service_user_name" {
   type        = string
   default     = "meshfed-service-user"
   description = "Name of the meshfed-service user. This user is responsible for replication."
@@ -68,7 +68,7 @@ variable "cost_explorer_management_account_service_role_name" {
   description = "Name of the custom role in the management account used by the cost explorer user."
 }
 
-variable "cost_explorer_meshcloud_account_service_user_name" {
+variable "cost_explorer_meshstack_account_service_user_name" {
   type        = string
   default     = "meshcloud-cost-explorer-user"
   description = "Name of the user using cost explorer service to collect metering data."

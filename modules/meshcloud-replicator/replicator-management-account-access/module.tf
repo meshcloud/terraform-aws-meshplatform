@@ -1,7 +1,7 @@
 # AWS Root Account Setup
 resource "aws_iam_role" "meshfed_service" {
   name               = var.management_account_service_role_name
-  description        = "This role is used by ${var.meshcloud_account_service_user_name} to obtain permissions on an org-wide level"
+  description        = "This role is used by ${var.meshstack_account_service_user_name} to obtain permissions on an org-wide level"
   assume_role_policy = data.aws_iam_policy_document.meshfed_service_assume_role.json
 }
 

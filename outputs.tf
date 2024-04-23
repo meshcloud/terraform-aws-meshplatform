@@ -4,9 +4,9 @@ output "management_account_id" {
   description = "Management Account ID"
 }
 
-output "meshcloud_account_id" {
-  value       = data.aws_caller_identity.meshcloud.account_id
-  description = "Meshcloud Account ID"
+output "meshstack_account_id" {
+  value       = data.aws_caller_identity.meshstack.account_id
+  description = "meshstack account ID"
 }
 
 output "automation_account_id" {
@@ -16,7 +16,7 @@ output "automation_account_id" {
 
 # Replicator
 output "replicator_aws_iam_keys" {
-  value       = module.meshcloud_account_replicator_access.aws_iam_keys
+  value       = module.meshstack_account_replicator_access.aws_iam_keys
   description = "You can access your credentials when you execute `terraform output replicator_aws_iam_keys` command"
   sensitive   = true
 }
@@ -38,7 +38,7 @@ output "replicator_privileged_external_id" {
 }
 
 output "replicator_workload_identity_federation_role" {
-  value = var.workload_identity_federation == null ? null : module.meshcloud_account_replicator_access.workload_identity_federation_role
+  value = var.workload_identity_federation == null ? null : module.meshstack_account_replicator_access.workload_identity_federation_role
 }
 
 output "meshstack_access_role_name" {
@@ -48,7 +48,7 @@ output "meshstack_access_role_name" {
 
 # Metering
 output "metering_aws_iam_keys" {
-  value       = module.meshcloud_account_metering_access.aws_iam_keys
+  value       = module.meshstack_account_metering_access.aws_iam_keys
   description = "You can access your credentials when you execute `terraform output metering_aws_iam_keys` command"
   sensitive   = true
 }
@@ -65,5 +65,5 @@ output "cost_explorer_privileged_external_id" {
 }
 
 output "cost_explorer_identity_federation_role" {
-  value = var.workload_identity_federation == null ? null : module.meshcloud_account_metering_access.workload_identity_federation_role
+  value = var.workload_identity_federation == null ? null : module.meshstack_account_metering_access.workload_identity_federation_role
 }
