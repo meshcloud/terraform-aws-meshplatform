@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [v0.3.0]
 
 ### Added
+
 - Added workload identity federation
 - Added option to disable access keys
 
