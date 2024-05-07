@@ -113,17 +113,22 @@ For an overview of the module structure, refer to [generated terraform docs](./T
       EOF
       ```
 
-2. Download the example `main.tf` and `outputs.tf` files.
+2. Create a terraform file that calls this module and produces outputs. Similar to:
 
-    ```sh
-    # Downloads main.tf and outputs.tf files into ~/terraform-aws-meshplatform
-    wget https://raw.githubusercontent.com/meshcloud/terraform-aws-meshplatform/main/examples/basic-aws-integration/main.tf -O ~/terraform-aws-meshplatform/main.tf
-    wget https://raw.githubusercontent.com/meshcloud/terraform-aws-meshplatform/main/examples/basic-aws-integration/outputs.tf -O ~/terraform-aws-meshplatform/outputs.tf
+    ```hcl
+    module "meshplatform" {
+      source = "git::https://github.com/meshcloud/terraform-aws-meshplatform.git"
+      # FILL INPUTS
+    }
+    output "meshplatform" {
+      sensitive = true
+      value     = module.meshplatform
+    }
     ```
 
-3. Open `~/terraform-aws-meshplatform/main.tf` with a text editor. Modify the module variables and Terraform state backend settings in the file.
+    > It is highly recommended to configure a [terraform backend](https://developer.hashicorp.com/terraform/language/settings/backends/configuration), otherwise you risk losing track of your applied resources.
 
-4. Execute the module.
+3. Execute the module.
 
     ```sh
     # Changes into ~/terraform-aws-meshplatform and applies terraform
@@ -132,23 +137,19 @@ For an overview of the module structure, refer to [generated terraform docs](./T
     terraform apply
     ```
 
-5. Access terraform output and pass it securely to meshcloud.
+4. Use the information from terraform output to configure the platform in meshStack.
 
     ```sh
-    # The JSON output contains sensitive values that must not be transmitted to meshcloud in plain text.
+    # The JSON output contains sensitive values that must not be transmitted anywhere other then the platform config screen in meshStack.
     terraform output -json
     ```
-
-## Example Usages
-
-Check [examples](./examples/) for different use cases. As a quick start we recommend using [basic-aws-integration](./examples/basic-aws-integration) example.
 
 [^1]: This How-To guides you through the setup from your Cloudshell. You can also run the terraform scripts on your local machine.
 [^2]: You can also use other [ways to assign values input variables](https://www.terraform.io/language/values/variables#assigning-values-to-root-module-variables).
 
 ## Contributing Guide
 
-Before opening a Pull Request, we recommend following the below steps to get a faster approval:
+Before opening a Pull Request, please do the following:
 
 1. Install [pre-commit](https://pre-commit.com/#install)
 
