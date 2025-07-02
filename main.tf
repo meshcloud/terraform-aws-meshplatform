@@ -76,6 +76,7 @@ module "management_account_replicator_access" {
   control_tower_portfolio_id               = var.control_tower_portfolio_id
   meshcloud_account_service_user_name      = var.meshcloud_account_service_user_name
   management_account_service_role_name     = var.management_account_service_role_name
+  meshstack_access_role_name               = var.meshstack_access_role_name
   landing_zone_ou_arns                     = var.landing_zone_ou_arns
   can_close_accounts_in_resource_org_paths = var.can_close_accounts_in_resource_org_paths
 
