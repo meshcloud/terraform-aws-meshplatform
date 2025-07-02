@@ -69,6 +69,12 @@ variable "automation_account_service_role_name" {
   description = "Name of the custom role in the automation account. See https://docs.meshcloud.io/docs/meshstack.how-to.integrate-meshplatform-aws-manually.html#set-up-aws-account-3-automation"
 }
 
+variable "meshstack_access_role_name" {
+  type        = string
+  default     = "MeshstackAccountAccessRole"
+  description = "Name of the account access role used by meshfed-service. This should be the same as 'Account Access Role' in AWS Platform Config in meshStack"
+}
+
 variable "cost_explorer_management_account_service_role_name" {
   type        = string
   default     = "MeshCostExplorerServiceRole"
