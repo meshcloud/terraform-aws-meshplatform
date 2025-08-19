@@ -82,6 +82,43 @@ See the `aws` [provider documentation](https://registry.terraform.io/providers/h
 
 For an overview of the module structure, refer to [generated terraform docs](./TERRAFORM_DOCS.md)
 
+## Account Closure Configuration
+
+You can configure which AWS accounts can be closed by meshStack using the `can_close_accounts_with_tags` variable. This allows you to define tag-based restrictions for account closure.
+
+> **Note:** In meshStack, you can configure additional tags for AWS accounts as part of the platform configuration. For more details, see [Tags in Cloud Tenants](https://docs.meshcloud.io/meshstack.metadata-tags/#tags-in-cloud-tenants).
+
+### Example Configuration
+
+```hcl
+# No account closure (default)
+can_close_accounts_with_tags = {}
+
+# Allow closing accounts with specific tags
+can_close_accounts_with_tags = {
+  "Environment" = ["dev", "staging"]
+  "Team"        = ["platform"]
+}
+
+# Allow closing all accounts
+can_close_accounts_with_tags = {
+  "__meshstack_allow_close_all__" = ["true"]
+}
+```
+
+**How it works:**
+
+- **Empty**: No accounts can be closed
+- **Tag-based**: Only accounts that have at least one of the specified tags can be closed. For example, with `"Environment" = ["dev", "staging"]`, an account can be closed if it has the tag `Environment=dev` OR `Environment=staging`
+- **Multiple tag keys**: Acts as OR logic - an account can be closed if it matches ANY of the tag criteria
+- **Special key**: `__meshstack_allow_close_all__` with value `["true"]` allows closing all accounts without any tag restrictions
+
+**Examples:**
+- Account with `Environment=dev` → Can be closed (matches first example)
+- Account with `Team=platform` → Can be closed (matches first example)  
+- Account with `Environment=prod` → Cannot be closed (doesn't match any values)
+- Account with no tags → Cannot be closed (unless using special key)
+
 ## How to Use This Module
 
 ### Using AWS Portal
@@ -197,7 +234,7 @@ Before opening a Pull Request, please do the following:
 |------|-------------|------|---------|:--------:|
 | <a name="input_automation_account_service_role_name"></a> [automation\_account\_service\_role\_name](#input\_automation\_account\_service\_role\_name) | Name of the custom role in the automation account. See https://docs.meshcloud.io/docs/meshstack.how-to.integrate-meshplatform-aws-manually.html#set-up-aws-account-3-automation | `string` | `"MeshfedAutomationRole"` | no |
 | <a name="input_aws_sso_instance_arn"></a> [aws\_sso\_instance\_arn](#input\_aws\_sso\_instance\_arn) | AWS SSO Instance ARN. Needs to be of the form arn:aws:sso:::instance/ssoins-xxxxxxxxxxxxxxx. Setup instructions https://docs.meshcloud.io/docs/meshstack.aws.sso-setup.html. | `string` | n/a | yes |
-| <a name="input_can_close_accounts_in_resource_org_paths"></a> [can\_close\_accounts\_in\_resource\_org\_paths](#input\_can\_close\_accounts\_in\_resource\_org\_paths) | AWS ResourceOrgPaths that are used in Landing Zones and where meshStack is allowed to close accounts. | `list(string)` | `[]` | no |
+| <a name="input_can_close_accounts_with_tags"></a> [can\_close\_accounts\_with\_tags](#input\_can\_close\_accounts\_with\_tags) | Map of tag keys to lists of tag values that allow account closure. Account closure is opt-in only - if not set or empty, no accounts can be closed. When set, only accounts with matching tags can be closed. Special case: {"\_\_meshstack\_allow\_close\_all\_\_" = ["true"]} allows closing all accounts without restrictions. Example: { "Environment" = ["dev", "staging"], "Team" = ["platform"] } | `map(list(string))` | `{}` | no |
 | <a name="input_control_tower_enrollment_enabled"></a> [control\_tower\_enrollment\_enabled](#input\_control\_tower\_enrollment\_enabled) | Set to true, to allow meshStack to enroll Accounts via AWS Control Tower for the meshPlatform. | `bool` | `false` | no |
 | <a name="input_control_tower_portfolio_id"></a> [control\_tower\_portfolio\_id](#input\_control\_tower\_portfolio\_id) | Must be set for AWS Control Tower | `string` | `""` | no |
 | <a name="input_cost_explorer_management_account_service_role_name"></a> [cost\_explorer\_management\_account\_service\_role\_name](#input\_cost\_explorer\_management\_account\_service\_role\_name) | Name of the custom role in the management account used by the cost explorer user. | `string` | `"MeshCostExplorerServiceRole"` | no |

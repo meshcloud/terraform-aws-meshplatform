@@ -68,17 +68,17 @@ module "management_account_replicator_access" {
   providers = {
     aws = aws.management
   }
-  meshcloud_account_id                     = data.aws_caller_identity.meshcloud.account_id
-  privileged_external_id                   = var.replicator_privileged_external_id
-  support_root_account_via_aws_sso         = var.support_root_account_via_aws_sso
-  aws_sso_instance_arn                     = var.aws_sso_instance_arn
-  control_tower_enrollment_enabled         = var.control_tower_enrollment_enabled
-  control_tower_portfolio_id               = var.control_tower_portfolio_id
-  meshcloud_account_service_user_name      = var.meshcloud_account_service_user_name
-  management_account_service_role_name     = var.management_account_service_role_name
-  meshstack_access_role_name               = var.meshstack_access_role_name
-  landing_zone_ou_arns                     = var.landing_zone_ou_arns
-  can_close_accounts_in_resource_org_paths = var.can_close_accounts_in_resource_org_paths
+  meshcloud_account_id                 = data.aws_caller_identity.meshcloud.account_id
+  privileged_external_id               = var.replicator_privileged_external_id
+  support_root_account_via_aws_sso     = var.support_root_account_via_aws_sso
+  aws_sso_instance_arn                 = var.aws_sso_instance_arn
+  control_tower_enrollment_enabled     = var.control_tower_enrollment_enabled
+  control_tower_portfolio_id           = var.control_tower_portfolio_id
+  meshcloud_account_service_user_name  = var.meshcloud_account_service_user_name
+  management_account_service_role_name = var.management_account_service_role_name
+  meshstack_access_role_name           = var.meshstack_access_role_name
+  landing_zone_ou_arns                 = var.landing_zone_ou_arns
+  can_close_accounts_with_tags         = var.can_close_accounts_with_tags
 
   allow_federated_role = var.workload_identity_federation != null
 

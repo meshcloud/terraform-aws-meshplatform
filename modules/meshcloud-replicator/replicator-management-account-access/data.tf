@@ -1,5 +1,15 @@
 locals {
   account_id = data.aws_caller_identity.current.account_id # current account number.
+
+  # Check if unrestricted account closure is enabled using reserved key
+  allow_close_all_accounts = (
+    length(var.can_close_accounts_with_tags) == 1 &&
+    contains(keys(var.can_close_accounts_with_tags), "__meshstack_allow_close_all__") &&
+    var.can_close_accounts_with_tags["__meshstack_allow_close_all__"][0] == "true"
+  )
+
+  # Get tag restrictions (empty if unrestricted access)
+  tag_restrictions = local.allow_close_all_accounts ? {} : var.can_close_accounts_with_tags
 }
 
 data "aws_caller_identity" "current" {}
@@ -58,20 +68,32 @@ data "aws_iam_policy_document" "meshfed_service" {
     var.landing_zone_ou_arns)
   }
 
-  statement {
-    sid    = "OrgManagementAccessCloseAccount"
-    effect = "Allow"
-    actions = [
-      "organizations:CloseAccount"
-    ]
-    resources = [
-      // allow acting on any account owned by this org
-      "arn:${data.aws_partition.current.partition}:organizations::*:account/o-*/*",
-    ]
-    condition {
-      test     = "ForAnyValue:StringLike"
-      variable = "aws:ResourceOrgPaths"
-      values   = var.can_close_accounts_in_resource_org_paths
+  # Account closure policy with tag-based conditions:
+  # Account closure is opt-in only - requires can_close_accounts_with_tags to be explicitly set
+  # Special case: {"__meshstack_allow_close_all__" = ["true"]} allows closing all accounts without restrictions
+  # Otherwise: Only accounts with matching tags can be closed
+  dynamic "statement" {
+    for_each = length(var.can_close_accounts_with_tags) > 0 ? [1] : []
+    content {
+      sid    = "OrgManagementAccessCloseAccount"
+      effect = "Allow"
+      actions = [
+        "organizations:CloseAccount"
+      ]
+      resources = [
+        // allow acting on any account owned by this org
+        "arn:${data.aws_partition.current.partition}:organizations::*:account/o-*/*",
+      ]
+
+      # Apply tag-based conditions (empty if unrestricted access)
+      dynamic "condition" {
+        for_each = local.tag_restrictions
+        content {
+          test     = "ForAnyValue:StringEquals"
+          variable = "aws:ResourceTag/${condition.key}"
+          values   = condition.value
+        }
+      }
     }
   }
 
