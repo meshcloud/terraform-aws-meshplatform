@@ -55,11 +55,10 @@ variable "landing_zone_ou_arns" {
   default     = []
 }
 
-variable "can_close_accounts_in_resource_org_paths" {
-  type = list(string)
-  // see https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourceorgpaths
-  description = "AWS ResourceOrgPaths that are used in Landing Zones and where meshStack is allowed to close accounts."
-  default     = [] // example: o-a1b2c3d4e5/r-f6g7h8i9j0example/ou-ghi0-awsccccc/ou-jkl0-awsddddd/
+variable "can_close_accounts_with_tags" {
+  type        = map(list(string))
+  description = "Map of tag keys to lists of tag values that allow account closure. Account closure is opt-in only - if not set or empty, no accounts can be closed. When set, only accounts with matching tags can be closed. Special case: {\"__meshstack_allow_close_all__\" = [\"true\"]} allows closing all accounts without restrictions. Example: { \"Environment\" = [\"dev\", \"staging\"], \"Team\" = [\"platform\"] }"
+  default     = {}
 }
 
 variable "allow_federated_role" {
