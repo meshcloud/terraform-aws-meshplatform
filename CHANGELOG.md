@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.5.1]
+
+### Changed
+
+- Fixed and simplified logic for checking if unrestricted account closure is enabled using reserved key `__meshstack_allow_close_all__`.
+
 ## [v0.5.0]
 
 ### Added

@@ -2,11 +2,7 @@ locals {
   account_id = data.aws_caller_identity.current.account_id # current account number.
 
   # Check if unrestricted account closure is enabled using reserved key
-  allow_close_all_accounts = (
-    length(var.can_close_accounts_with_tags) == 1 &&
-    contains(keys(var.can_close_accounts_with_tags), "__meshstack_allow_close_all__") &&
-    var.can_close_accounts_with_tags["__meshstack_allow_close_all__"][0] == "true"
-  )
+  allow_close_all_accounts = jsonencode(var.can_close_accounts_with_tags) == jsonencode({ "__meshstack_allow_close_all__" = ["true"] })
 
   # Get tag restrictions (empty if unrestricted access)
   tag_restrictions = local.allow_close_all_accounts ? {} : var.can_close_accounts_with_tags
