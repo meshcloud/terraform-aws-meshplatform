@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.5.0]
+
+### Added
+
+- Option to provide replicator technical user permission to close accounts based on tag restrictions. This allows for more granular control over which accounts can be closed by the replicator service.
+- Possibility to set `meshstack_access_role_name` from the top-level module.
+
+### Removed
+
+- Option to provide replicator technical user permission to close accounts for specified resource org paths (i.e. landing zones) - this feature has been replaced by the tag-based closure configuration, since using Organization Units other than root did not work as expected.
+
 ## [v0.4.0]
 
 ### Added
@@ -37,8 +48,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial Release
 
-[unreleased]: https://github.com/meshcloud/terraform-aws-meshplatform/compare/v0.4.0...HEAD
+[unreleased]: https://github.com/meshcloud/terraform-aws-meshplatform/compare/v0.5.0...HEAD
 [v0.1.0]: https://github.com/meshcloud/terraform-aws-meshplatform/releases/tag/v0.1.0
 [v0.2.0]: https://github.com/meshcloud/terraform-aws-meshplatform/releases/tag/v0.2.0
 [v0.3.0]: https://github.com/meshcloud/terraform-aws-meshplatform/releases/tag/v0.3.0
 [v0.4.0]: https://github.com/meshcloud/terraform-aws-meshplatform/releases/tag/v0.4.0
+[v0.5.0]: https://github.com/meshcloud/terraform-aws-meshplatform/releases/tag/v0.5.0

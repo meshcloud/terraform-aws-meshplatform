@@ -91,33 +91,23 @@ You can configure which AWS accounts can be closed by meshStack using the `can_c
 ### Example Configuration
 
 ```hcl
-# No account closure (default)
+# No account closure (default) - no accounts can be closed
 can_close_accounts_with_tags = {}
 
 # Allow closing accounts with specific tags
+# Accounts with Environment=dev, Environment=staging, or Team=platform can be closed
 can_close_accounts_with_tags = {
-  "Environment" = ["dev", "staging"]
-  "Team"        = ["platform"]
+  "Environment" = ["dev", "staging"]  # Account with Environment=dev OR Environment=staging
+  "Team"        = ["platform"]       # Account with Team=platform
 }
+# Note: Multiple tag keys use OR logic - account needs to match ANY criteria
+# Examples: ✓ Environment=dev, ✓ Team=platform, ✗ Environment=prod, ✗ no tags
 
-# Allow closing all accounts
+# Allow closing all accounts without restrictions
 can_close_accounts_with_tags = {
   "__meshstack_allow_close_all__" = ["true"]
 }
 ```
-
-**How it works:**
-
-- **Empty**: No accounts can be closed
-- **Tag-based**: Only accounts that have at least one of the specified tags can be closed. For example, with `"Environment" = ["dev", "staging"]`, an account can be closed if it has the tag `Environment=dev` OR `Environment=staging`
-- **Multiple tag keys**: Acts as OR logic - an account can be closed if it matches ANY of the tag criteria
-- **Special key**: `__meshstack_allow_close_all__` with value `["true"]` allows closing all accounts without any tag restrictions
-
-**Examples:**
-- Account with `Environment=dev` → Can be closed (matches first example)
-- Account with `Team=platform` → Can be closed (matches first example)  
-- Account with `Environment=prod` → Cannot be closed (doesn't match any values)
-- Account with no tags → Cannot be closed (unless using special key)
 
 ## How to Use This Module
 
