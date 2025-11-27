@@ -213,6 +213,8 @@ data "aws_iam_policy_document" "meshfed_service_enrollment_additional" {
       "controltower:CreateManagedAccount",
       "controltower:DescribeManagedAccount",
       "controltower:DeregisterManagedAccount",
+      "controltower:ListLandingZones",
+      "controltower:GetLandingZone",
       "s3:GetObject",
       "organizations:describeOrganization",
       "sso:DescribeRegisteredRegions"
