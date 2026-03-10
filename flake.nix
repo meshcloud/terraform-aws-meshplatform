@@ -2,7 +2,7 @@
   description = "Flake for terraform-aws-meshplatform";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.11";
   };
 
   outputs = { self, nixpkgs }:
@@ -13,8 +13,6 @@
       with pkgs;
       [
         awscli2
-        (azure-cli.withExtensions [ azure-cli.extensions.account ])
-        nodejs
       ];
 
     # core packages required in CI and not preinstalled in github actions
@@ -35,7 +33,6 @@
       with pkgs;
       [
         opentofu
-        terragrunt
         tflint
         tfupdate
         terraform-docs

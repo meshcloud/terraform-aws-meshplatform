@@ -122,6 +122,21 @@ data "aws_iam_policy_document" "meshfed_service" {
     ]
   }
 
+  statement {
+    sid    = "OrgManagementIdentityStoreGroupManagement"
+    effect = "Allow"
+    actions = [
+      "identitystore:GetGroupId",
+      "identitystore:CreateGroup",
+      "identitystore:DeleteGroup",
+      "identitystore:ListGroupMemberships",
+      "identitystore:CreateGroupMembership",
+      "identitystore:DeleteGroupMembership",
+      "identitystore:GetUserId"
+    ]
+    resources = ["*"]
+  }
+
   # Without these additional rights AWS SSO cannot assign groups to the organization's root account.
   # All other accounts can be managed without these additional rights.
   dynamic "statement" {
@@ -176,6 +191,11 @@ data "aws_iam_policy_document" "meshfed_service_assume_role" {
   }
 }
 
+# Also update https://docs.meshcloud.io/integrations/aws/how-to-integrate/#8-integrate-aws-control-tower
+# best approach for future: integrate docs snippet by linking to tf source code directly
+
+
+
 # As per AWS recommendation https://docs.aws.amazon.com/controltower/latest/userguide/roles-how.html#automated-provisioning
 data "aws_iam_policy_document" "meshfed_service_enrollment_additional" {
   version = "2012-10-17"
@@ -183,41 +203,12 @@ data "aws_iam_policy_document" "meshfed_service_enrollment_additional" {
     sid    = "AWSControlTowerAccountFactoryAccess"
     effect = "Allow"
     actions = [
-      "sso:GetProfile",
-      "sso:CreateProfile",
-      "sso:UpdateProfile",
-      "sso:AssociateProfile",
-      "sso:CreateApplicationInstance",
-      "sso:GetSSOStatus",
-      "sso:GetTrust",
-      "sso:CreateTrust",
-      "sso:UpdateTrust",
-      "sso:GetPeregrineStatus",
-      "sso:GetApplicationInstance",
-      "sso:ListDirectoryAssociations",
-      "sso:ListPermissionSets",
-      "sso:GetPermissionSet",
-      "sso:ProvisionApplicationInstanceForAWSAccount",
-      "sso:ProvisionApplicationProfileForAWSAccountInstance",
-      "sso:ProvisionSAMLProvider",
-      "sso:ListProfileAssociations",
-      "sso-directory:ListMembersInGroup",
-      "sso-directory:AddMemberToGroup",
-      "sso-directory:SearchGroups",
-      "sso-directory:SearchGroupsWithGroupName",
-      "sso-directory:SearchUsers",
-      "sso-directory:CreateUser",
-      "sso-directory:DescribeGroups",
-      "sso-directory:DescribeDirectory",
-      "sso-directory:GetUserPoolInfo",
       "controltower:CreateManagedAccount",
       "controltower:DescribeManagedAccount",
       "controltower:DeregisterManagedAccount",
       "controltower:ListLandingZones",
       "controltower:GetLandingZone",
-      "s3:GetObject",
       "organizations:describeOrganization",
-      "sso:DescribeRegisteredRegions"
     ]
     resources = ["*"]
   }
