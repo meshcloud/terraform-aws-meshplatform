@@ -36,12 +36,12 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_automation_account_id"></a> [automation\_account\_id](#input\_automation\_account\_id) | The ID of the Management Account ID | `string` | n/a | yes |
 | <a name="input_automation_account_service_role_name"></a> [automation\_account\_service\_role\_name](#input\_automation\_account\_service\_role\_name) | Name of the custom role in the automation account. See https://docs.meshcloud.io/docs/meshstack.how-to.integrate-meshplatform-aws-manually.html#set-up-aws-account-3-automation | `string` | `"MeshfedAutomationRole"` | no |
-| <a name="input_create_access_key"></a> [create\_access\_key](#input\_create\_access\_key) | Create access key for service account | `bool` | `true` | no |
+| <a name="input_create_access_key"></a> [create\_access\_key](#input\_create\_access\_key) | Set to false to skip creating static IAM access keys for the service account. Should be set to false when workload\_identity\_federation is configured. | `bool` | `true` | no |
 | <a name="input_management_account_id"></a> [management\_account\_id](#input\_management\_account\_id) | The ID of the Management Account ID | `string` | n/a | yes |
 | <a name="input_management_account_service_role_name"></a> [management\_account\_service\_role\_name](#input\_management\_account\_service\_role\_name) | Name of the custom role in the management account. See https://docs.meshcloud.io/docs/meshstack.how-to.integrate-meshplatform-aws-manually.html#set-up-aws-account-2-management | `string` | `"MeshfedServiceRole"` | no |
 | <a name="input_meshcloud_account_service_user_name"></a> [meshcloud\_account\_service\_user\_name](#input\_meshcloud\_account\_service\_user\_name) | Name of the meshfed-service user. This user is responsible for replication. | `string` | `"meshfed-service-user"` | no |
 | <a name="input_privileged_external_id"></a> [privileged\_external\_id](#input\_privileged\_external\_id) | Privileged external ID for the meshfed-service to use | `string` | n/a | yes |
-| <a name="input_workload_identity_federation"></a> [workload\_identity\_federation](#input\_workload\_identity\_federation) | n/a | <pre>object({<br/>    issuer                = string,<br/>    audience              = string,<br/>    subject               = string,<br/>    identity_provider_arn = string<br/>  })</pre> | `null` | no |
+| <a name="input_workload_identity_federation"></a> [workload\_identity\_federation](#input\_workload\_identity\_federation) | Set to configure Workload Identity Federation. When set, a federated IAM role is created allowing authentication via OIDC instead of static access keys. | <pre>object({<br/>    issuer                = string,<br/>    audience              = string,<br/>    subject               = string,<br/>    identity_provider_arn = string<br/>  })</pre> | `null` | no |
 
 ## Outputs
 

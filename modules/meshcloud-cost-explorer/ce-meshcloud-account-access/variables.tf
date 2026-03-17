@@ -22,7 +22,7 @@ variable "privileged_external_id" {
 
 variable "create_access_key" {
   type        = bool
-  description = "Create access key for service account"
+  description = "Set to false to skip creating static IAM access keys for the service account. Should be set to false when workload_identity_federation is configured."
   default     = true
 }
 
@@ -33,5 +33,6 @@ variable "workload_identity_federation" {
     subject               = string,
     identity_provider_arn = string
   })
-  default = null
+  default     = null
+  description = "Set to configure Workload Identity Federation. When set, a federated IAM role is created allowing authentication via OIDC instead of static access keys."
 }

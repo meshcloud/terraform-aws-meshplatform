@@ -17,6 +17,7 @@ module "meshcloud_account_metering_access" {
   privileged_external_id               = var.cost_explorer_privileged_external_id
   management_account_service_role_name = var.cost_explorer_management_account_service_role_name
   meshcloud_account_service_user_name  = var.cost_explorer_meshcloud_account_service_user_name
+  create_access_key                    = var.create_access_keys
 
   workload_identity_federation = var.workload_identity_federation == null ? null : {
     issuer                = var.workload_identity_federation.issuer,
@@ -37,6 +38,7 @@ module "meshcloud_account_replicator_access" {
   meshcloud_account_service_user_name  = var.meshcloud_account_service_user_name
   management_account_service_role_name = var.management_account_service_role_name
   automation_account_service_role_name = var.automation_account_service_role_name
+  create_access_key                    = var.create_access_keys
 
   workload_identity_federation = var.workload_identity_federation == null ? null : {
     issuer                = var.workload_identity_federation.issuer,
