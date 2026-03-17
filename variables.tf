@@ -94,8 +94,8 @@ variable "support_root_account_via_aws_sso" {
 
 variable "create_access_keys" {
   type        = bool
-  default     = true
-  description = "Set to false to disable creation of any service account access keys."
+  default     = false
+  description = "Set to true to enable creation of service account access keys. This is not recommended for production environments. Consider using workload identity federation instead by setting workload_identity_federation variable."
 }
 
 variable "workload_identity_federation" {
