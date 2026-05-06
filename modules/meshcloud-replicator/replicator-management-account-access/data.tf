@@ -107,34 +107,40 @@ data "aws_iam_policy_document" "meshfed_service" {
     resources = ["*"]
   }
 
-  statement {
-    sid    = "OrgManagementAccessSSO"
-    effect = "Allow"
-    actions = [
-      "sso:ListAccountAssignments",
-      "sso:CreateAccountAssignment",
-      "sso:DescribeAccountAssignmentCreationStatus"
-    ]
-    resources = [
-      "${var.aws_sso_instance_arn}",
-      "arn:${data.aws_partition.current.partition}:sso:::permissionSet/*/*",
-      "arn:${data.aws_partition.current.partition}:sso:::account/*"
-    ]
+  dynamic "statement" {
+    for_each = var.aws_sso_instance_arn != null ? [1] : []
+    content {
+      sid    = "OrgManagementAccessSSO"
+      effect = "Allow"
+      actions = [
+        "sso:ListAccountAssignments",
+        "sso:CreateAccountAssignment",
+        "sso:DescribeAccountAssignmentCreationStatus"
+      ]
+      resources = [
+        "${var.aws_sso_instance_arn}",
+        "arn:${data.aws_partition.current.partition}:sso:::permissionSet/*/*",
+        "arn:${data.aws_partition.current.partition}:sso:::account/*"
+      ]
+    }
   }
 
-  statement {
-    sid    = "OrgManagementIdentityStoreGroupManagement"
-    effect = "Allow"
-    actions = [
-      "identitystore:GetGroupId",
-      "identitystore:CreateGroup",
-      "identitystore:DeleteGroup",
-      "identitystore:ListGroupMemberships",
-      "identitystore:CreateGroupMembership",
-      "identitystore:DeleteGroupMembership",
-      "identitystore:GetUserId"
-    ]
-    resources = ["*"]
+  dynamic "statement" {
+    for_each = var.aws_sso_instance_arn != null ? [1] : []
+    content {
+      sid    = "OrgManagementIdentityStoreGroupManagement"
+      effect = "Allow"
+      actions = [
+        "identitystore:GetGroupId",
+        "identitystore:CreateGroup",
+        "identitystore:DeleteGroup",
+        "identitystore:ListGroupMemberships",
+        "identitystore:CreateGroupMembership",
+        "identitystore:DeleteGroupMembership",
+        "identitystore:GetUserId"
+      ]
+      resources = ["*"]
+    }
   }
 
   # Without these additional rights AWS SSO cannot assign groups to the organization's root account.
