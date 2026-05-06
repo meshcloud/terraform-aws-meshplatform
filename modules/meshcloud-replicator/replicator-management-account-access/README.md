@@ -38,7 +38,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_allow_federated_role"></a> [allow\_federated\_role](#input\_allow\_federated\_role) | n/a | `bool` | `false` | no |
-| <a name="input_aws_sso_instance_arn"></a> [aws\_sso\_instance\_arn](#input\_aws\_sso\_instance\_arn) | ARN of the AWS SSO instance to use | `string` | n/a | yes |
+| <a name="input_aws_sso_instance_arn"></a> [aws\_sso\_instance\_arn](#input\_aws\_sso\_instance\_arn) | ARN of the AWS SSO instance to use. When set, meshStack replicates IAM permissions for managed AWS Accounts to AWS IAM Identity Center. | `string` | `null` | no |
 | <a name="input_can_close_accounts_with_tags"></a> [can\_close\_accounts\_with\_tags](#input\_can\_close\_accounts\_with\_tags) | Map of tag keys to lists of tag values that allow account closure. Account closure is opt-in only - if not set or empty, no accounts can be closed. When set, only accounts with matching tags can be closed. Special case: {"\_\_meshstack\_allow\_close\_all\_\_" = ["true"]} allows closing all accounts without restrictions. Example: { "Environment" = ["dev", "staging"], "Team" = ["platform"] } | `map(list(string))` | `{}` | no |
 | <a name="input_control_tower_enrollment_enabled"></a> [control\_tower\_enrollment\_enabled](#input\_control\_tower\_enrollment\_enabled) | Set to true, to allow meshStack to enroll Accounts via AWS Control Tower for the meshPlatform | `bool` | `false` | no |
 | <a name="input_control_tower_portfolio_id"></a> [control\_tower\_portfolio\_id](#input\_control\_tower\_portfolio\_id) | Must be set for AWS Control Tower | `string` | `""` | no |

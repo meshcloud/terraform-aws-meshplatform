@@ -1,6 +1,11 @@
 variable "aws_sso_instance_arn" {
   type        = string
-  description = "AWS SSO Instance ARN. Needs to be of the form arn:aws:sso:::instance/ssoins-xxxxxxxxxxxxxxx. Setup instructions https://docs.meshcloud.io/docs/meshstack.aws.sso-setup.html."
+  default     = null
+  description = "ARN of the AWS SSO instance to use. When set, meshStack replicates IAM permissions for managed AWS Accounts to AWS IAM Identity Center. Set to null to disable IAM permission replication. Setup instructions at https://docs.meshcloud.io/docs/meshstack.aws.sso-setup.html."
+  validation {
+    condition     = var.aws_sso_instance_arn == null || startswith(var.aws_sso_instance_arn, "arn:aws:sso:::instance/")
+    error_message = "aws_sso_instance_arn must be of the form arn:aws:sso:::instance/ssoins-xxxxxxxxxxxxxxx."
+  }
 }
 
 variable "control_tower_enrollment_enabled" {

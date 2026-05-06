@@ -40,7 +40,12 @@ variable "control_tower_portfolio_id" {
 
 variable "aws_sso_instance_arn" {
   type        = string
-  description = "ARN of the AWS SSO instance to use"
+  default     = null
+  description = "ARN of the AWS SSO instance to use. When set, meshStack replicates IAM permissions for managed AWS Accounts to AWS IAM Identity Center."
+  validation {
+    condition     = var.aws_sso_instance_arn == null || startswith(var.aws_sso_instance_arn, "arn:aws:sso:::instance/")
+    error_message = "aws_sso_instance_arn must be of the form arn:aws:sso:::instance/ssoins-xxxxxxxxxxxxxxx."
+  }
 }
 
 variable "support_root_account_via_aws_sso" {

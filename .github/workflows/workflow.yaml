@@ -7,3 +7,20 @@ on:
 jobs:
   build:
     uses: meshcloud/shared-workflows/.github/workflows/terraform-meshplatform-modules-build-workflow.yml@main
+
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+        # NOTE: if we add more testing workflows we should consider moving the common steps to a shared workflow too
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: nixbuild/nix-quick-install-action@2c9db80fb984ceb1bcaa77cdda3fdf8cfba92035 # v34
+        with:
+          nix_on_tmpfs: true
+      - uses: rrbutani/use-nix-shell-action@59a52b2b9bbfe3cc0e7deb8f9059abe37a439edf # v1.1.0
+        with:
+          devShell: .#github_actions
+      - name: run terraform tests
+        run: scripts/test.sh
