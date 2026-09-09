@@ -42,36 +42,8 @@ data "aws_iam_policy_document" "meshfed_automation" {
     sid    = "VisualEditor0"
     effect = "Allow"
     actions = [
-      "cloudformation:UpdateStackInstances",
-      "cloudformation:DescribeStackSet",
-      "cloudformation:ListStackInstances",
-      "cloudformation:CreateStackInstances",
-      "cloudformation:UpdateStackInstances",
       "lambda:InvokeFunction"
     ]
     resources = ["*"]
-  }
-}
-
-data "aws_iam_policy_document" "cloudformation_admin_assume_role" {
-  version = "2012-10-17"
-  statement {
-    effect = "Allow"
-    principals {
-      type        = "Service"
-      identifiers = ["cloudformation.amazonaws.com"]
-    }
-    actions = ["sts:AssumeRole"]
-  }
-}
-
-data "aws_iam_policy_document" "cloudformation_stackset_execution" {
-  version = "2012-10-17"
-
-  statement {
-    sid       = "VisualEditor0"
-    effect    = "Allow"
-    actions   = ["sts:AssumeRole"]
-    resources = ["arn:${data.aws_partition.current.partition}:iam::*:role/AWSCloudFormationStackSetExecutionRole"]
   }
 }
